@@ -1,4 +1,4 @@
-;;; dionysos-backend-vlc.el --- Dionysos VLC backend
+;;; dionysos-backend-vlc-test.el --- Tests for Dionysos VLC backend
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,19 +21,12 @@
 
 ;;; Code:
 
-(require 'dionysos-backend)
-(require 'dionysos-utils)
-
-(dionysos--define-backend vlc
-  :name "VLC"
-  :command "vlc"
-  :filter '("ogg" "mp3" "wav" "flac")
-  :start 'dionysos--vlc-start-player)
+(ert-deftest test-dionysos-backend-vlc ()
+  (with-test-sandbox
+   (should (find 'vlc dionysos-backends))
+   (should (custom-variable-p 'dionysos-vlc-command))
+   ))
 
 
-(defun dionysos--vlc-start-player (filename &optional arguments)
-  (dionysos--create-process
-   "dionysos-vlc" nil dionysos-vlc-command '("--extraintf" "rc")))
-
-(provide 'dionysos-backend-vlc)
-;;; dionysos-backend-vlc.el ends here
+(provide 'dionysos-backend-vlc-test)
+;;; dionysos-backend-vlc-test.el ends here
