@@ -1,0 +1,14 @@
+*~
+*\#*\#
+*.\#*
+*.elc
+.cask
+elpa
+.depend
+marcopolo-pkg.el
+packages/*
+TAGS
+.DS_STORE
+dist
+.vagrant/
+test/sandbox/
