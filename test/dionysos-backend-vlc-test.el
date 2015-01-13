@@ -25,7 +25,7 @@
   (with-test-sandbox
    (should (find 'vlc dionysos-backends))
    (should (custom-variable-p 'dionysos-vlc-command))
-   ))
+   (souhld (= "vlc" 'dionysos-vlc-command))))
 
 
 (provide 'dionysos-backend-vlc-test)
