@@ -21,30 +21,56 @@
 
 ;;; Code:
 
-(require 'dired)
 
-(defmacro with-dionysos-buffer (&rest body)
-  "Execute the forms in BODY in Dionysos buffer."
-  (declare (indent 0) (debug t))
-  `(with-current-buffer
-       (if (bongo-buffer-p)
-           (current-buffer)
-         (bongo-buffer))
-     ,@body))
+(require 'cl-lib)
+(require 'f)
+(require 'tabulated-list)
 
 
-(defun dionysos-list-directory (directory-name)
-  "Insert a new directory `DIRECTORY-NAME' into the dionysos buffer."
-  (interactive (list (expand-file-name
-                      (read-directory-name
-                       "Insert directory: " default-directory nil t
-                       (when (eq major-mode 'dired-mode)
-                         (when (file-directory-p (dired-get-filename))
-                           (dired-get-filename t)))))))
-  (when (not (file-directory-p directory-name))
-    (error "Not a directory: %s" directory-name))
-  (dolist (filename (directory-files directory-name t "\\`[^.]"))
-    (message "File: %s" filename)))
+(defvar dionysos--directory-mode-hook nil)
+
+(defvar dionysos--directory-mode-map
+  (let ((map (make-keymap)))
+    map)
+  "Keymap for `dionysos--directory-mode' major mode.")
+
+(define-derived-mode dionysos--directory-mode tabulated-list-mode
+  "Dionysos mode"
+  "Major mode for Dionysos."
+  :group 'dionysos
+  (setq tabulated-list-format [("Name"  40 t)
+                               ("Type"  10 nil)
+                               ])
+  (setq tabulated-list-padding 2)
+  (setq tabulated-list-sort-key (cons "Name" nil))
+  (tabulated-list-init-header))
+
+(defun dionysos--create-filenames-entries (filenames)
+  "Create entries for 'tabulated-list-entries from `FILENAMES'."
+  (mapcar (lambda (filename)
+            (list filename
+                  (vector (colorize-term (f-no-ext (f-filename filename)) 'green)
+                          (f-ext filename))))
+          filenames))
+
+(defvar dionysos--directory-mode-history nil)
+
+;;;###autoload
+(defun dionysos-directory (directory)
+  "Show music files from `DIRECTORY'."
+  (interactive
+   (list (read-from-minibuffer "Music directory : "
+                               (car dionysos--directory-mode-history)
+                               nil
+                               nil
+                               'dionysos--directory-mode-history)))
+  (pop-to-buffer "*Dionysos*" nil)
+  (dionysos--directory-mode)
+  (setq tabulated-list-entries
+        (dionysos--create-filenames-entries
+         (dionysos--list-directory directory)))
+  (tabulated-list-print t))
+
 
 
 
