@@ -52,9 +52,12 @@
 ;; Dionysos dependencies
 
 (require 'dionysos-version)
+(require 'dionysos-io)
+(require 'dionysos-process)
 (require 'dionysos-ui)
 (require 'dionysos-backend)
 (require 'dionysos-backend-vlc)
+(require 'dionysos-backend-mplayer)
 
 (provide 'dionysos)
 ;;; dionysos.el ends here

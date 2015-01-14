@@ -1,4 +1,4 @@
-;;; dionysos-utils.el --- some tools
+;;; dionysos-io.el --- Dionysos input/output tools
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,21 +21,21 @@
 
 ;;; Code:
 
+(require 'f)
 
-(defun dionysos--output-message-sentinel (process msg)
-  (when (memq (process-status process)
-              '(exit signal))
-    (message (concat (process-name process) " - " msg))))
-
-(defun dionysos--create-process (process-name command arguments)
-  (let ((process
-         (apply 'start-process
-                process-name
-                nil
-                command
-                arguments)))
-    (set-process-sentinel process 'dionysos--output-message-sentinel)))
+(defun dionysos--list-directory (directory-name &optional filter)
+  "Insert a new directory `DIRECTORY-NAME' into the dionysos buffer."
+  (interactive (list (expand-file-name
+                      (read-directory-name
+                       "Insert directory: " default-directory nil t))))
+  (when (not (file-directory-p directory-name))
+    (error "Not a directory: %s" directory-name))
+  (if (eql 'nil filter)
+      (f-files directory-name)
+    (f-files directory-name (lambda (file)
+                              (member (f-ext file) filter)))))
 
 
-(provide 'dionysos-utils)
-;;; dionysos-utils.el ends here
+
+(provide 'dionysos-io)
+;;; dionysos-io.el ends here
