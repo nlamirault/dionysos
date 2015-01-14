@@ -1,4 +1,4 @@
-;;; dionysos-backend-test.el --- Tests for Dionysos backend
+;;; dionysos-backend-mplayer.el --- Dionysos MPlayer backend
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,22 +21,24 @@
 
 ;;; Code:
 
-(ert-deftest test-dionysos-backend-default-player ()
-  (with-test-sandbox
-   (should (equal nil dionysos-player))))
+(require 'dionysos-backend)
+(require 'dionysos-process)
+
+(dionysos--define-backend mplayer
+  :name "MPlayer"
+  :command "mplayer"
+  :filter '("ogg" "mp3" "wav" "flac")
+  :start 'dionysos--mplayer-start
+  :stop 'dionysos--mplayer-stop)
 
 
-(ert-deftest test-dionysos-backend-foobar ()
-  (with-test-sandbox
-   (dionysos--define-backend foo
-     :name "foo"
-     :command "/usr/local/bin/foo"
-     :filter '("ogg" "mp3")
-     :start 'dyonisis--foo-start-player)
-   (should (find 'foo dionysos-backends))
-   ;;(should (equal '(vlc mplayer foo) dionysos-backends))
-   (should (custom-variable-p 'dionysos-foo-command))))
+(defun dionysos--mplayer-start (filename &optional arguments)
+  (dionysos--create-process
+   "dionysos-mplayer" dionysos-mplayer-command (append '("-quiet" "-really-quiet")
+                                               (list filename))))
 
+(defun dionysos--mplayer-stop ()
+  (dionysos--kill-process "dionysos-mplayer"))
 
-(provide 'dionysos-backend-test)
-;;; dionysos-backend-test.el ends here
+(provide 'dionysos-backend-mplayer)
+;;; dionysos-backend-mplayer.el ends here

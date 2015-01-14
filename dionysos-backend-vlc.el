@@ -22,18 +22,29 @@
 ;;; Code:
 
 (require 'dionysos-backend)
-(require 'dionysos-utils)
+(require 'dionysos-process)
 
 (dionysos--define-backend vlc
   :name "VLC"
   :command "vlc"
   :filter '("ogg" "mp3" "wav" "flac")
-  :start 'dionysos--vlc-start-player)
+  :start 'dionysos--vlc-start
+  :stop 'dionysos--vlc-stop)
 
 
-(defun dionysos--vlc-start-player (filename &optional arguments)
+(defconst dionysos-vlc-process-name "dionysos-vlc")
+
+
+(defun dionysos--vlc-start (filename)
+  "Start playing `FILENAME' using VLC."
   (dionysos--create-process
-   "dionysos-vlc" nil dionysos-vlc-command '("--extraintf" "rc")))
+   dionysos-vlc-process-name dionysos-vlc-command (append '("--intf" "rc")
+                                                          (list filename)
+                                                          '("vlc://quit"))))
+
+(defun dionysos--vlc-stop ()
+  "Stop VLC process."
+  (dionysos--kill-process dionysos-vlc-process-name))
 
 (provide 'dionysos-backend-vlc)
 ;;; dionysos-backend-vlc.el ends here

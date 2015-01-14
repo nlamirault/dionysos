@@ -25,8 +25,19 @@
   (with-test-sandbox
    (should (find 'vlc dionysos-backends))
    (should (custom-variable-p 'dionysos-vlc-command))
-   (souhld (= "vlc" 'dionysos-vlc-command))))
+   (should (string= "vlc" dionysos-vlc-command))))
 
+
+(ert-deftest test-dionysos-backend-vlc-play-mp3 ()
+  (with-test-sandbox
+   (with-music-file
+    "resources/Roulement_tambour-01.mp3"
+    (dionysos--vlc-start file)
+    (should (equal 'run (dionysos--status-process "dionysos-vlc")))
+    ;; FIXME: Can't stop in unit test ?
+    ;; (dionysos--vlc-stop)
+    ;; (should (equal nil (dionysos--status-process "dionysos-vlc"))))))
+    )))
 
 (provide 'dionysos-backend-vlc-test)
 ;;; dionysos-backend-vlc-test.el ends here

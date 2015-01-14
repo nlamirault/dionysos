@@ -1,4 +1,4 @@
-;;; dionysos-backend-test.el --- Tests for Dionysos backend
+;;; dionysos-backend-mplayer-test.el --- Tests for Dionysos MPlayer backend
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,22 +21,23 @@
 
 ;;; Code:
 
-(ert-deftest test-dionysos-backend-default-player ()
+(ert-deftest test-dionysos-backend-mplayer ()
   (with-test-sandbox
-   (should (equal nil dionysos-player))))
+   (should (find 'mplayer dionysos-backends))
+   (should (custom-variable-p 'dionysos-mplayer-command))
+   (should (string= "mplayer" dionysos-mplayer-command))))
 
 
-(ert-deftest test-dionysos-backend-foobar ()
+(ert-deftest test-dionysos-backend-mplayer-play-mp3 ()
   (with-test-sandbox
-   (dionysos--define-backend foo
-     :name "foo"
-     :command "/usr/local/bin/foo"
-     :filter '("ogg" "mp3")
-     :start 'dyonisis--foo-start-player)
-   (should (find 'foo dionysos-backends))
-   ;;(should (equal '(vlc mplayer foo) dionysos-backends))
-   (should (custom-variable-p 'dionysos-foo-command))))
+   (with-music-file
+    "resources/Roulement_tambour-01.mp3"
+    (dionysos--mplayer-start file)
+    (should (equal 'run (dionysos--status-process "dionysos-mplayer")))
+    ;; FIXME: Can't stop in unit test ?
+    ;; (dionysos--mplayer-stop)
+    ;; (should (equal nil (dionysos--status-process "dionysos-mplayer"))))))
+    )))
 
-
-(provide 'dionysos-backend-test)
-;;; dionysos-backend-test.el ends here
+(provide 'dionysos-backend-mplayer-test)
+;;; dionysos-backend-mplayer-test.el ends here

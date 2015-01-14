@@ -71,6 +71,11 @@
   "Setup Dionysos."
   )
 
+(defmacro with-music-file (filename &rest body)
+  `(let ((file (f-join dionysos-testsuite-dir ,filename)))
+     ,@body))
+
+
 (defmacro with-test-sandbox (&rest body)
   "Evaluate BODY in an empty sandbox directory."
   `(unwind-protect
