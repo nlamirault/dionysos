@@ -27,10 +27,40 @@
 (require 'tabulated-list)
 
 
+(require 'dionysos-backend-vlc)
+
+;; Debug
+
+(defun print-current-line-id ()
+  "Display current project."
+  (interactive)
+  (message (concat "Current ID is: " (tabulated-list-get-id))))
+
+
+;;
+;; Directory music files mode
+;;
+
+(defun dionysos--directory-mode-start ()
+  (interactive)
+  (message "Playing %s" (tabulated-list-get-id))
+  (dionysos--vlc-start (format "%s" (tabulated-list-get-id))))
+
+
+(defun dionysos--directory-mode-stop ()
+  (interactive)
+  (dionysos--vlc-stop))
+
+
 (defvar dionysos--directory-mode-hook nil)
 
 (defvar dionysos--directory-mode-map
   (let ((map (make-keymap)))
+    (define-key map (kbd "d") 'print-current-line-id)
+    (define-key map (kbd "p") 'dionysos--directory-mode-previous)
+    (define-key map (kbd "n") 'dionysos--directory-mode-next)
+    (define-key map (kbd "RET") 'dionysos--directory-mode-start)
+    (define-key map (kbd "SPC") 'dionysos--directory-mode-stop)
     map)
   "Keymap for `dionysos--directory-mode' major mode.")
 
