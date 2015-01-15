@@ -26,27 +26,21 @@
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources"))))
-     (should (= 4 (length files))))))
-
-(ert-deftest test-dionysos-list-directory ()
-  (with-test-sandbox
-   (let ((files (dionysos--list-directory
-                 (f-join dionysos-testsuite-dir "resources"))))
-     (should (= 4 (length files))))))
+     (should (= 5 (length files))))))
 
 (ert-deftest test-dionysos-list-directory-simple-filter ()
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources")
                  '("mp3"))))
-     (should (= 2 (length files))))))
+     (should (= 3 (length files))))))
 
 (ert-deftest test-dionysos-list-directory-multiple-filters ()
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources")
                  '("mp3" "ogg"))))
-     (should (= 3 (length files))))))
+     (should (= 4 (length files))))))
 
 
 (provide 'dionysos-io-test)

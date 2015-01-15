@@ -30,7 +30,8 @@ VERSION=$(shell \
 PACKAGE_FOLDER=$(APP)-$(VERSION)
 ARCHIVE=$(PACKAGE_FOLDER).tar
 
-ELS = $(wildcard *.el)
+#ELS = $(wildcard *.el)
+ELS = $(shell find . -name "*.el")
 OBJECTS = $(ELS:.el=.elc)
 
 NO_COLOR=\033[0m
@@ -63,10 +64,12 @@ elpa:
 	@touch $@
 
 .PHONY: build
-build : elpa $(OBJECTS)
+#build : elpa $(OBJECTS)
+build: elpa
+	@$(CASK) build
 
 .PHONY: test
-test: build
+test:
 	@echo -e "$(OK_COLOR)[$(APP)] Unit tests$(NO_COLOR)"
 	@$(CASK) exec ert-runner
 

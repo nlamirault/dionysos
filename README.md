@@ -1,53 +1,45 @@
-# marcopolo
+# dionysos
 
 [![travis][badge-travis]][travis]
 [![drone][badge-drone]][drone]
-[![Melpa Status](http://melpa.milkbox.net/packages/marcopolo-badge.svg)](http://melpa.milkbox.net/#/marcopolo)
-[![MELPA Stable](http://stable.melpa.org/packages/marcopolo-badge.svg)](http://stable.melpa.org/#/marcopolo)
-[![Coverage Status](https://coveralls.io/repos/nlamirault/marcopolo/badge.png)](https://coveralls.io/r/nlamirault/marcopolo)
+[![Melpa Status](http://melpa.milkbox.net/packages/dionysos-badge.svg)](http://melpa.milkbox.net/#/dionysos)
+[![MELPA Stable](http://stable.melpa.org/packages/dionysos-badge.svg)](http://stable.melpa.org/#/dionysos)
+[![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png)](https://coveralls.io/r/nlamirault/dionysos)
 
-`marcopolo` provides :
-* a REST client to the Docker registry / Hub API
-
-Name comes from the [CMA CGM Marco Polo][] container ship
+`dionysos` is a simple music player for Emacs.
+Backends available are : [vlc][]
 
 ## Installation
 
-The recommended way to install ``marcopolo`` is via [MELPA][]:
+The recommended way to install ``dionysos`` is via [MELPA][]:
 
-    M-x package-install marcopolo
+    M-x package-install dionysos
 
 or [Cask][]:
 
-	(depends-on "marcopolo")
-
+	(depends-on "dionysos")
 
 ## Usage
 
-* Configure marcopolo in Elisp :
+### Directory listing
 
-        (setq marcopolo--registry-host "https://registry.hub.docker.com"
-              marcopolo--hub-username "xxx"
-              marcopolo--hub-password "yyy")
+Listen to music files in a directory :
 
-* Or using environment variables :
+    M-x dionysos-files
 
-        $ export DOCKER_REGISTRY_HOST="https://registry.hub.docker.com"
-        $ export DOCKER_HUB_USERNAME="xxx"
-        $ export DOCKER_HUB_PASSWORD="yyy"
-
-* The API :
-
-        M-x marcopolo-registry-search
-
-* Some screenshots are available in *img* directory.
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>RET</kbd>       | start playing file from the current line
+<kbd>SPACE</kbd>     | stop music player
+<kbd>n</kbd>         | play next song
+<kbd>p</kbd>         | play previous song
 
 
 ## Development
 
 ### Cask
 
-``marcopolo`` use [Cask][] for dependencies
+``dionysos`` use [Cask][] for dependencies
 management. Install it and retrieve dependencies :
 
     $ curl -fsSkL https://raw.github.com/cask/cask/master/go | python
@@ -86,21 +78,17 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 
 
-[marcopolo]: https://github.com/nlamirault/marcopolo
+[dionysos]: https://github.com/nlamirault/dionysos
 [badge-license]: https://img.shields.io/badge/license-GPL_2-green.svg?style=flat
-[LICENSE]: https://github.com/nlamirault/marcopolo/blob/master/LICENSE
-[travis]: https://travis-ci.org/nlamirault/marcopolo
-[badge-travis]: http://img.shields.io/travis/nlamirault/marcopolo.svg?style=flat
-[badge-drone]: https://drone.io/github.com/nlamirault/marcopolo/status.png
-[drone]: https://drone.io/github.com/nlamirault/marcopolo/latest
-[badge-wercker]: https://app.wercker.com/status/230e39942045191c79677ed663572c69/s
-[wercker]: https://app.wercker.com/project/bykey/230e39942045191c79677ed663572c69
-[Issue tracker]: https://github.com/nlamirault/marcopolo/issues
+[LICENSE]: https://github.com/nlamirault/dionysos/blob/master/LICENSE
+[travis]: https://travis-ci.org/nlamirault/dionysos
+[badge-travis]: http://img.shields.io/travis/nlamirault/dionysos.svg?style=flat
+[badge-drone]: https://drone.io/github.com/nlamirault/dionysos/status.png
+[drone]: https://drone.io/github.com/nlamirault/dionysos/latest
+[Issue tracker]: https://github.com/nlamirault/dionysos/issues
 
 [GNU Emacs]: https://www.gnu.org/software/emacs/
 [MELPA]: http://melpa.milkbox.net/
 [Cask]: http://cask.github.io/
-[Helm]: https://github.com/emacs-helm/helm
-[Overseer]: https://github.com/tonini/overseer.el
 
-[CMA CGM Marco Polo]: http://en.wikipedia.org/wiki/CMA_CGM_Marco_Polo
+[Overseer]: https://github.com/tonini/overseer.el

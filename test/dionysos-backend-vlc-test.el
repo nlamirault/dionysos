@@ -33,11 +33,10 @@
    (with-music-file
     "resources/Roulement_tambour-01.mp3"
     (dionysos--vlc-start file)
-    (should (equal 'run (dionysos--status-process "dionysos-vlc")))
-    ;; FIXME: Can't stop in unit test ?
-    ;; (dionysos--vlc-stop)
-    ;; (should (equal nil (dionysos--status-process "dionysos-vlc"))))))
-    )))
+    (should (equal 'run (dionysos--status-process dionysos--process-name)))
+    (dionysos--vlc-stop)
+    (should (equal nil (dionysos--status-process dionysos--process-name))))))
+
 
 (provide 'dionysos-backend-vlc-test)
 ;;; dionysos-backend-vlc-test.el ends here

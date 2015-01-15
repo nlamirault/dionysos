@@ -1,4 +1,6 @@
-((nil . ((indent-tabs-mode . nil)
-         (fill-column . 80)
-         (sentence-end-double-space . t)
-         (emacs-lisp-docstring-fill-column . 75))))
+((nil
+  (bug-reference-url-format . "https://github.com/nlamirault/dionysos/issues/%s"))
+ (markdown-mode
+  (bug-reference-bug-regexp . "\\[GH-\\(?2:[[:digit:]]+\\)]")))
+ (rst-mode
+  (bug-reference-bug-regexp . "\\[GH-\\(?2:[[:digit:]]+\\)]")))

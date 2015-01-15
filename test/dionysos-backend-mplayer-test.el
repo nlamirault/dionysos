@@ -33,11 +33,10 @@
    (with-music-file
     "resources/Roulement_tambour-01.mp3"
     (dionysos--mplayer-start file)
-    (should (equal 'run (dionysos--status-process "dionysos-mplayer")))
-    ;; FIXME: Can't stop in unit test ?
-    ;; (dionysos--mplayer-stop)
-    ;; (should (equal nil (dionysos--status-process "dionysos-mplayer"))))))
-    )))
+    (should (equal 'run (dionysos--status-process dionysos--process-name)))
+    (dionysos--mplayer-stop)
+    (should (equal nil (dionysos--status-process dionysos--process-name))))))
+
 
 (provide 'dionysos-backend-mplayer-test)
 ;;; dionysos-backend-mplayer-test.el ends here

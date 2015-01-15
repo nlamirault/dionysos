@@ -91,7 +91,7 @@
          ;; (f-delete overseer-sandbox-path :force)))
          )))
          ;; (error
-         ;;  (message (ansi-red "[Scame] Error during unit tests : %s" ex))))))
+         ;;  (message (ansi-red "[dionysos] Error during unit tests : %s" ex))))))
 
 
 (provide 'test-helper)
