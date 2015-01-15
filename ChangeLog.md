@@ -8,8 +8,8 @@
 - Init project
 
 
-[TravisCI]: https://travis-ci.org/nlamirault/marcopolo
-[Drone.io]: https://drone.io/github.com/nlamirault/marcopolo
+[TravisCI]: https://travis-ci.org/nlamirault/dionysos
+[Drone.io]: https://drone.io/github.com/nlamirault/dionysos
 [overseer]: https://github.com/tonini/overseer.el
 
 
