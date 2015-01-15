@@ -32,19 +32,20 @@
   :stop 'dionysos--vlc-stop)
 
 
-(defconst dionysos-vlc-process-name "dionysos-vlc")
+(defun dionysos--vlc-start (filename &optional hook)
+  "Start playing music.
+`FILENAME' using VLC.
+`HOOK' is for next action."
+  (message "Create process %s" filename)
+  (dionysos--create-process dionysos--process-name
+                            dionysos-vlc-command
+                            (append '("--intf" "rc") (list filename) '("vlc://quit"))
+                            hook))
 
-
-(defun dionysos--vlc-start (filename)
-  "Start playing `FILENAME' using VLC."
-  (dionysos--create-process
-   dionysos-vlc-process-name dionysos-vlc-command (append '("--intf" "rc")
-                                                          (list filename)
-                                                          '("vlc://quit"))))
 
 (defun dionysos--vlc-stop ()
   "Stop VLC process."
-  (dionysos--kill-process dionysos-vlc-process-name))
+  (dionysos--kill-process dionysos--process-name))
 
 (provide 'dionysos-backend-vlc)
 ;;; dionysos-backend-vlc.el ends here

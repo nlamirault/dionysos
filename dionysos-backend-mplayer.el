@@ -33,12 +33,12 @@
 
 
 (defun dionysos--mplayer-start (filename &optional arguments)
-  (dionysos--create-process
-   "dionysos-mplayer" dionysos-mplayer-command (append '("-quiet" "-really-quiet")
-                                               (list filename))))
+  (dionysos--create-process dionysos--process-name
+                            dionysos-mplayer-command
+                            (append '("-quiet" "-really-quiet") (list filename))))
 
 (defun dionysos--mplayer-stop ()
-  (dionysos--kill-process "dionysos-mplayer"))
+  (dionysos--kill-process dionysos--process-name))
 
 (provide 'dionysos-backend-mplayer)
 ;;; dionysos-backend-mplayer.el ends here

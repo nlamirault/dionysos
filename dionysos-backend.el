@@ -28,6 +28,9 @@
 (defvar dionysos-player nil
   "The currently music player.")
 
+(defconst dionysos--process-name "dionysos"
+  "Name of the Dionysos music player process.")
+
 (make-variable-buffer-local 'dionysos-player)
 
 (defmacro dionysos--define-backend (name &rest options)

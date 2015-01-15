@@ -22,29 +22,42 @@
 ;;; Code:
 
 
-(defun dionysos--output-message-sentinel (process msg)
-  (when (memq (process-status process)
-              '(exit signal))
-    (message (concat (process-name process) " - " msg))))
-
-(defun dionysos--create-process (process-name command arguments)
+(defun dionysos--create-process (process-name command arguments &optional hook)
   "Create a new asynchronous process.
 `PROCESS-NAME' is used to identify this process
 `COMMAND' correspond to the program running
-`ARGUMENTS' are arguments passed to the program."
-  (let ((process
-         (apply 'start-process
-                process-name
-                nil
-                command
-                arguments)))
-    (set-process-sentinel process 'dionysos--output-message-sentinel)))
-
+`ARGUMENTS' are arguments passed to the program.
+`HOOK' is called when process is finished."
+  (message "Create Process : %s %s %s %s"
+           process-name command arguments (process-list))
+  (let ((status (dionysos--status-process process-name)))
+    (message "Process status : %s" status)
+    (unless (equal 'run status)
+      (let ((process
+             (apply 'start-process
+                    process-name
+                    nil
+                    command
+                    arguments)))
+        (lexical-let
+            ((after-fn hook))
+          (set-process-sentinel process
+                                (lambda (process event)
+                                  (when (memq (process-status process)
+                                              '(exit signal))
+                                    (message "Process End %s %s %s"
+                                             (process-name process)
+                                             event
+                                             (process-exit-status process))
+                                    (when (= 0 (process-exit-status process))
+                                      (funcall after-fn))))))))))
 
 (defun dionysos--kill-process (process-name)
   "Stop a process identified by `PROCESS-NAME'."
   (let ((process (get-process process-name)))
-    (kill-process process)))
+    (when process
+      (kill-process process)
+      (sleep-for 1))))
 
 
 (defun dionysos--status-process (process-name)

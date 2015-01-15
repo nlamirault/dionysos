@@ -59,6 +59,8 @@
 (require 'dionysos-backend-vlc)
 (require 'dionysos-backend-mplayer)
 (require 'dionysos-mode)
+(require 'dionysos-directory-mode)
+(require 'dionysos-files-mode)
 
 (provide 'dionysos)
 ;;; dionysos.el ends here
