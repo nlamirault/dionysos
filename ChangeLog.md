@@ -1,6 +1,6 @@
 # dionysos ChangeLog
 
-# Version 0.1.0 (12/22/2014)
+# Version 0.1.0 (15/01/2015)
 
 - Init files mode (directory listing)
 - [GH-1][]: Add VLC backend
