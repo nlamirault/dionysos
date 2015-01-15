@@ -92,3 +92,4 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [Cask]: http://cask.github.io/
 
 [Overseer]: https://github.com/tonini/overseer.el
+[vlc]: http://www.videolan.org/vlc/
