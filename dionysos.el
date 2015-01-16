@@ -58,6 +58,7 @@
 (require 'dionysos-backend)
 (require 'dionysos-backend-vlc)
 (require 'dionysos-backend-mplayer)
+(require 'dionysos-volume)
 (require 'dionysos-mode)
 (require 'dionysos-directory-mode)
 (require 'dionysos-files-mode)

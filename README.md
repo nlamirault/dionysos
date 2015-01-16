@@ -39,6 +39,8 @@ Keybinding           | Description
 <kbd>SPACE</kbd>     | stop music player
 <kbd>n</kbd>         | play next song
 <kbd>p</kbd>         | play previous song
+<kbd>+</kbd>         | raise volume
+<kbd>-</kbd>         | lower volume
 
 
 ## Development

@@ -38,7 +38,8 @@
              filename (type-of filename) dionysos-backend)
     (if dionysos-backend
         (funcall (dionysos--backend-start dionysos-backend)
-                 (string-trim filename) 'next-action)
+                 (string-trim filename)
+                 'next-action)
       (message "Dionysos: no backend specify."))))
 
 (defun dionysos-files-mode-stop ()
@@ -80,6 +81,8 @@
     (define-key map (kbd "q") 'dionysos-files-mode-quit)
     (define-key map (kbd "p") 'dionysos-files-mode-previous)
     (define-key map (kbd "n") 'dionysos-files-mode-next)
+    (define-key map (kbd "+") 'dionysos--volume-raise)
+    (define-key map (kbd "-") 'dionysos--volume-decrease)
     (define-key map (kbd "RET") 'dionysos-files-mode-start)
     (define-key map (kbd "SPC") 'dionysos-files-mode-stop)
     map)

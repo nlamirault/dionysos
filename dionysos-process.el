@@ -49,8 +49,10 @@
                                              (process-name process)
                                              event
                                              (process-exit-status process))
-                                    (when (= 0 (process-exit-status process))
+                                    (when (and (= 0 (process-exit-status process))
+                                               after-fn)
                                       (funcall after-fn))))))))))
+
 
 (defun dionysos--kill-process (process-name)
   "Stop a process identified by `PROCESS-NAME'."
