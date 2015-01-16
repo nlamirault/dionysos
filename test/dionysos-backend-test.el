@@ -23,8 +23,7 @@
 
 (ert-deftest test-dionysos-backend-default-player ()
   (with-test-sandbox
-   (should (equal nil dionysos-player))))
-
+   (should (equal nil dionysos-backend))))
 
 (ert-deftest test-dionysos-backend-foobar ()
   (with-test-sandbox
@@ -33,7 +32,7 @@
      :command "/usr/local/bin/foo"
      :filter '("ogg" "mp3")
      :start 'dyonisis--foo-start-player)
-   (should (find 'foo dionysos-backends))
+   (should (dionysos--get-backend 'foo))
    ;;(should (equal '(vlc mplayer foo) dionysos-backends))
    (should (custom-variable-p 'dionysos-foo-command))))
 

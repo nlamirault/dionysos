@@ -25,7 +25,7 @@
 (require 'f)
 
 
-(require 'dionysos-backend-vlc)
+(require 'dionysos-backend)
 (require 'dionysos-mode)
 
 
@@ -34,12 +34,16 @@
 (defun dionysos-files-mode-start ()
   (interactive)
   (let ((filename (thing-at-point 'line)))
-    (message "Playing : %s %s " filename (type-of filename))
-    (dionysos--vlc-start (string-trim filename) 'next-action)))
+    (message "Playing : %s %s %s"
+             filename (type-of filename) dionysos-backend)
+    (if dionysos-backend
+        (funcall (dionysos--backend-start dionysos-backend)
+                 (string-trim filename) 'next-action)
+      (message "Dionysos: no backend specify."))))
 
 (defun dionysos-files-mode-stop ()
   (interactive)
-  (dionysos--vlc-stop))
+  (funcall (dionysos--backend-stop dionysos-backend)))
 
 (defun dionysos-files-mode-next ()
   (interactive)

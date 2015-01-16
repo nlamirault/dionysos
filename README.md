@@ -7,7 +7,7 @@
 [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png)](https://coveralls.io/r/nlamirault/dionysos)
 
 `dionysos` is a simple music player for Emacs.
-Backends available are : [vlc][]
+Backends available are : [vlc][], [mplayer][]
 
 ## Installation
 
@@ -20,6 +20,12 @@ or [Cask][]:
 	(depends-on "dionysos")
 
 ## Usage
+
+### Backend
+
+Setup your backend :
+
+    (setq dionysos-backend 'vlc)
 
 ### Directory listing
 
@@ -93,3 +99,4 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 [Overseer]: https://github.com/tonini/overseer.el
 [vlc]: http://www.videolan.org/vlc/
+[mplayer]: http://www.mplayerhq.hu/design7/news.html

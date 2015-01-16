@@ -23,7 +23,7 @@
 
 (ert-deftest test-dionysos-backend-mplayer ()
   (with-test-sandbox
-   (should (find 'mplayer dionysos-backends))
+   (should (dionysos--get-backend 'mplayer))
    (should (custom-variable-p 'dionysos-mplayer-command))
    (should (string= "mplayer" dionysos-mplayer-command))))
 
