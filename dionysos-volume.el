@@ -1,4 +1,4 @@
-;;; dionysos-backend-mplayer-test.el --- Tests for Dionysos MPlayer backend
+;;; dionysos-volume.el --- Dionysos volume management
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,22 +21,27 @@
 
 ;;; Code:
 
-(ert-deftest test-dionysos-backend-mplayer ()
-  (with-test-sandbox
-   (should (dionysos--get-backend 'mplayer))
-   (should (custom-variable-p 'dionysos-mplayer-command))
-   (should (string= "mplayer" dionysos-mplayer-command))))
+
+(defconst dionysos--volume-process "dionysos-volume"
+  "The process name for Dionysos volume management process.")
 
 
-(ert-deftest test-dionysos-backend-mplayer-play-mp3 ()
-  (with-test-sandbox
-   (with-music-file
-    "resources/Roulement_tambour-01.mp3"
-    (dionysos--mplayer-start file)
-    (should (equal 'run (dionysos--status-process dionysos--process-name)))
-    (dionysos--mplayer-stop)
-    (should (equal nil (dionysos--status-process dionysos--process-name))))))
+(defun dionysos--volume-raise ()
+  "Raise volume."
+  (interactive)
+  (dionysos--create-process dionysos--volume-process
+                            "amixer"
+                            (list "-q" "sset" "Master" "5%+")))
 
 
-(provide 'dionysos-backend-mplayer-test)
-;;; dionysos-backend-mplayer-test.el ends here
+(defun dionysos--volume-decrease ()
+  "Decrease volume."
+  (interactive)
+  (dionysos--create-process dionysos--volume-process
+                            "amixer"
+                            (list "-q" "sset" "Master" "5%-")))
+
+
+
+(provide 'dionysos-volume)
+;;; dionysos-volume.el ends here

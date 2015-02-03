@@ -25,13 +25,11 @@
 (defvar dionysos-backends '()
   "List of available music backends.")
 
-(defvar dionysos-player nil
-  "The currently music player.")
+(defvar dionysos-backend nil
+  "The currently music backend.")
 
 (defconst dionysos--process-name "dionysos"
   "Name of the Dionysos music player process.")
-
-(make-variable-buffer-local 'dionysos-player)
 
 (defmacro dionysos--define-backend (name &rest options)
   "Macro which define a new music backend.
@@ -40,6 +38,8 @@
   (let* ((group-backend-name
           (intern (format "dionysos-%s" name)))
          (command-name (plist-get options :command))
+         (command-start (plist-get options :start))
+         (command-stop (plist-get options :stop))
          (command (eval command-name))
          (command-name-variable
           (intern (format "dionysos-%s-command" name))))
@@ -52,7 +52,31 @@
          ,(format "The name of the `%s' executable." name)
          :type 'string
          :group ',group-backend-name)
-       (add-to-list 'dionysos-backends ',name t))))
+       ;;(add-to-list 'dionysos-backends ',name t))))
+       (add-to-list 'dionysos-backends
+                    (cons ',name
+                          (list (cons 'start ,command-start)
+                                (cons 'stop ,command-stop)))))))
+
+
+(defun dionysos--get-backend (name)
+  "Retrieve backend from available backends.
+`NAME' identify the backend."
+  (assoc name dionysos-backends))
+
+
+(defun dionysos--backend-start (name)
+  (let ((backend (dionysos--get-backend name)))
+    (when backend
+      (cdr (assoc 'start backend)))))
+
+
+(defun dionysos--backend-stop (name)
+  (let ((backend (dionysos--get-backend name)))
+    (when backend
+      (cdr (assoc 'stop backend)))))
+
+
 
 (provide 'dionysos-backend)
 ;;; dionysos-backend.el ends here

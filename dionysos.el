@@ -2,7 +2,7 @@
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; URL: https://github.com/nlamirault/dionysos
-;; Version: 0.1.0
+;; Version: 0.2.0
 ;; Keywords: music
 
 ;; Package-Requires: ((s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0"))
@@ -58,6 +58,7 @@
 (require 'dionysos-backend)
 (require 'dionysos-backend-vlc)
 (require 'dionysos-backend-mplayer)
+(require 'dionysos-volume)
 (require 'dionysos-mode)
 (require 'dionysos-directory-mode)
 (require 'dionysos-files-mode)

@@ -7,7 +7,7 @@
 [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png)](https://coveralls.io/r/nlamirault/dionysos)
 
 `dionysos` is a simple music player for Emacs.
-Backends available are : [vlc][]
+Backends available are : [vlc][], [mplayer][]
 
 ## Installation
 
@@ -21,6 +21,12 @@ or [Cask][]:
 
 ## Usage
 
+### Backend
+
+Setup your backend :
+
+    (setq dionysos-backend 'vlc)
+
 ### Directory listing
 
 Listen to music files in a directory :
@@ -33,6 +39,8 @@ Keybinding           | Description
 <kbd>SPACE</kbd>     | stop music player
 <kbd>n</kbd>         | play next song
 <kbd>p</kbd>         | play previous song
+<kbd>+</kbd>         | raise volume
+<kbd>-</kbd>         | lower volume
 
 
 ## Development
@@ -92,3 +100,5 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [Cask]: http://cask.github.io/
 
 [Overseer]: https://github.com/tonini/overseer.el
+[vlc]: http://www.videolan.org/vlc/
+[mplayer]: http://www.mplayerhq.hu/design7/news.html

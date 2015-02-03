@@ -23,10 +23,18 @@
 
 (ert-deftest test-dionysos-backend-vlc ()
   (with-test-sandbox
-   (should (find 'vlc dionysos-backends))
+   (should (dionysos--get-backend 'vlc))
    (should (custom-variable-p 'dionysos-vlc-command))
    (should (string= "vlc" dionysos-vlc-command))))
 
+
+(ert-deftest test-dionysos-backend-vlc-start-process ()
+  (with-test-sandbox
+   (should (eql 'dionysos--vlc-start (dionysos--backend-start 'vlc)))))
+
+(ert-deftest test-dionysos-backend-vlc-stop-process ()
+  (with-test-sandbox
+   (should (equal 'dionysos--vlc-stop (dionysos--backend-stop 'vlc)))))
 
 (ert-deftest test-dionysos-backend-vlc-play-mp3 ()
   (with-test-sandbox
