@@ -2,7 +2,8 @@
 
 # Version 0.2.0 (IN PROGRESS)
 
-- [GH-1][]: MPlayer backend
+- Manage volume
+- [GH-2][]: MPlayer backend
 
 
 # Version 0.1.0 (15/01/2015)
@@ -15,8 +16,7 @@
 
 [TravisCI]: https://travis-ci.org/nlamirault/dionysos
 [Drone.io]: https://drone.io/github.com/nlamirault/dionysos
-[overseer]: https://github.com/tonini/overseer.el
 
 
 [GH-1]: https://github.com/nlamirault/dionysos/issues/1
-[GH-1]: https://github.com/nlamirault/dionysos/issues/2
+[GH-2]: https://github.com/nlamirault/dionysos/issues/2
