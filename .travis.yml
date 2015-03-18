@@ -84,8 +84,9 @@ env:
 ### of all test dependencies are also used.
 ###
 
-# before_install:
+before_install:
 #   - git submodule --quiet update --init --recursive
+#   - apt-get install vlc mplayer
 
 install:
   - if [ "$METHOD" = 'evm' ]; then
