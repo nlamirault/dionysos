@@ -43,12 +43,13 @@ Keybinding           | Description
 <kbd>+</kbd>         | raise volume
 <kbd>-</kbd>         | lower volume
 
-
 ### Playlist using MPD
 
 You could play songs from MPD playlist :
 
     M-x dionysos-mpd-playlist
+
+[MPD Playlist!](var/dionysos-mpd-0.3.png)
 
 In this mode, you could use manage MPD :
 
