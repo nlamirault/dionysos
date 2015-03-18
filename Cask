@@ -26,6 +26,7 @@
 
 ;; Development
 (development
+ (depends-on "libmpdee" "2.1.0")
  (depends-on "f" "0.17.2")
  (depends-on "s" "1.9.0")
  (depends-on "ansi" "0.4.0")

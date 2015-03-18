@@ -23,6 +23,7 @@ or [Cask][]:
 
 ### Backend
 
+You could use this backends : **vlc**, **mplayer** and **mpd**.
 Setup your backend :
 
     (setq dionysos-backend 'vlc)
@@ -42,6 +43,25 @@ Keybinding           | Description
 <kbd>+</kbd>         | raise volume
 <kbd>-</kbd>         | lower volume
 
+### Playlist using MPD
+
+You could play songs from MPD playlist :
+
+    M-x dionysos-mpd-playlist
+
+[MPD Playlist!](var/dionysos-mpd-0.3.png)
+
+In this mode, you could use manage MPD :
+
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>n</kbd>         | Go to the next song
+<kbd>n</kbd>         | Go to the previous song
+<kbd>c</kbd>         | Play song from current position
+<kbd>s</kbd>         | Start playing
+<kbd>SPC</kbd>       | Stop playing
+<kbd>+</kbd>         | Raise volume
+<kbd>-</kbd>         | Decrease volume
 
 ## Development
 

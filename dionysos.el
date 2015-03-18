@@ -2,10 +2,10 @@
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; URL: https://github.com/nlamirault/dionysos
-;; Version: 0.2.0
+;; Version: 0.3.0
 ;; Keywords: music
 
-;; Package-Requires: ((s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0"))
+;; Package-Requires: ((libmpdee "2.1.0") (s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0"))
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -43,14 +43,7 @@
 
 ;; Customization
 
-(defgroup dionysos nil
-  "A music player for Emacs."
-  :group 'applications
-  :link '(url-link :tag "Github" "https://github.com/nlamirault/dionysos")
-  :link '(emacs-commentary-link :tag "Commentary" "dionysos"))
-
-;; Dionysos dependencies
-
+(require 'dionysos-custom)
 (require 'dionysos-version)
 (require 'dionysos-io)
 (require 'dionysos-process)
@@ -58,10 +51,12 @@
 (require 'dionysos-backend)
 (require 'dionysos-backend-vlc)
 (require 'dionysos-backend-mplayer)
+(require 'dionysos-backend-mpd)
 (require 'dionysos-volume)
 (require 'dionysos-mode)
 (require 'dionysos-directory-mode)
 (require 'dionysos-files-mode)
+(require 'dionysos-mpd-mode)
 
 (provide 'dionysos)
 ;;; dionysos.el ends here

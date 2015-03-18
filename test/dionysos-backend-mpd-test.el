@@ -1,4 +1,4 @@
-;;; dionysos-volume.el --- Dionysos volume management
+;;; dionysos-backend-mpd-test.el --- Tests for Dionysos MPD backend
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,30 +21,12 @@
 
 ;;; Code:
 
-
-(require 'dionysos-process)
-
-
-(defconst dionysos--volume-process "dionysos-volume"
-  "The process name for Dionysos volume management process.")
-
-
-(defun dionysos-volume-raise ()
-  "Raise volume."
-  (interactive)
-  (dionysos--create-process dionysos--volume-process
-                            "amixer"
-                            (list "-q" "sset" "Master" "5%+")))
+(ert-deftest test-dionysos-backend-mpd ()
+  (with-test-sandbox
+   (should (dionysos--get-backend 'mpd))
+   (should (string-equal "localhost" dionysos-mpd-host))
+   (should (= 6600 dionysos-mpd-port))))
 
 
-(defun dionysos-volume-decrease ()
-  "Decrease volume."
-  (interactive)
-  (dionysos--create-process dionysos--volume-process
-                            "amixer"
-                            (list "-q" "sset" "Master" "5%-")))
-
-
-
-(provide 'dionysos-volume)
-;;; dionysos-volume.el ends here
+(provide 'dionysos-backend-mpd-test)
+;;; dionysos-backend-mpd-test.el ends here

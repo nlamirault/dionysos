@@ -1,4 +1,4 @@
-;;; dionysos-volume.el --- Dionysos volume management
+;;; dionysos-custom.el --- Customization group of Dionysos
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -21,30 +21,12 @@
 
 ;;; Code:
 
-
-(require 'dionysos-process)
-
-
-(defconst dionysos--volume-process "dionysos-volume"
-  "The process name for Dionysos volume management process.")
-
-
-(defun dionysos-volume-raise ()
-  "Raise volume."
-  (interactive)
-  (dionysos--create-process dionysos--volume-process
-                            "amixer"
-                            (list "-q" "sset" "Master" "5%+")))
+(defgroup dionysos nil
+  "A music player for Emacs."
+  :group 'applications
+  :link '(url-link :tag "Github" "https://github.com/nlamirault/dionysos")
+  :link '(emacs-commentary-link :tag "Commentary" "dionysos"))
 
 
-(defun dionysos-volume-decrease ()
-  "Decrease volume."
-  (interactive)
-  (dionysos--create-process dionysos--volume-process
-                            "amixer"
-                            (list "-q" "sset" "Master" "5%-")))
-
-
-
-(provide 'dionysos-volume)
-;;; dionysos-volume.el ends here
+(provide 'dionysos-custom)
+;;; dionysos-custom.el ends here
