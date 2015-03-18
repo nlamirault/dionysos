@@ -271,15 +271,15 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
    (dionysos--render (dionysos--mpd-playlist))))
 
 
-;;;###autoload
-(defun dionysos-mpd-songs ()
-  "Show music files from MPD."
-  (interactive)
-;;  (pop-to-buffer "*Dionysos*" nil)
-  ;;(dionysos--mpd-mode)
-  (dionysos-with-widget
-   (propertize "Songs")
-   (dionysos--render (dionysos--mpd-songs))))
+;; ;;;###autoload
+;; (defun dionysos-mpd-songs ()
+;;   "Show music files from MPD."
+;;   (interactive)
+;; ;;  (pop-to-buffer "*Dionysos*" nil)
+;;   ;;(dionysos--mpd-mode)
+;;   (dionysos-with-widget
+;;    (propertize "Songs")
+;;    (dionysos--render (dionysos--mpd-songs))))
 
 
 (provide 'dionysos-mpd-mode)
