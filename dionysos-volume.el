@@ -22,11 +22,14 @@
 ;;; Code:
 
 
+(require 'dionysos-process)
+
+
 (defconst dionysos--volume-process "dionysos-volume"
   "The process name for Dionysos volume management process.")
 
 
-(defun dionysos--volume-raise ()
+(defun dionysos-volume-raise ()
   "Raise volume."
   (interactive)
   (dionysos--create-process dionysos--volume-process
@@ -34,7 +37,7 @@
                             (list "-q" "sset" "Master" "5%+")))
 
 
-(defun dionysos--volume-decrease ()
+(defun dionysos-volume-decrease ()
   "Decrease volume."
   (interactive)
   (dionysos--create-process dionysos--volume-process
