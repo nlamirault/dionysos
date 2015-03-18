@@ -25,7 +25,7 @@
   (with-test-sandbox
    (should (dionysos--get-backend 'mpd))
    (should (string-equal "localhost" dionysos-mpd-host))
-   (should (string-equal 6600 dionysos-mpd-port))))
+   (should (= 6600 dionysos-mpd-port))))
 
 
 (provide 'dionysos-backend-mpd-test)
