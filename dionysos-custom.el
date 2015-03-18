@@ -1,4 +1,4 @@
-;;; Dionysos Cask file
+;;; dionysos-custom.el --- Customization group of Dionysos
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -17,20 +17,16 @@
 ;; Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 ;; 02110-1301, USA.
 
-(source "melpa" "http://melpa.milkbox.net/packages/")
-(source "gnu" "http://elpa.gnu.org/packages/")
-(source "marmalade" "http://marmalade-repo.org/packages/")
+;;; Commentary:
 
-(package-file "dionysos.el")
-(files "dionysos*.el" (:exclude ".dir-locals.el"))
+;;; Code:
 
-;; Development
-(development
- (depends-on "libmpdee" "2.1.0")
- (depends-on "f" "0.17.2")
- (depends-on "s" "1.9.0")
- (depends-on "ansi" "0.4.0")
- (depends-on "pkg-info" "0.5.0")
- (depends-on "ert")
- (depends-on "ert-runner" "0.6.4")
- (depends-on "undercover" "0.4.0"))
+(defgroup dionysos nil
+  "A music player for Emacs."
+  :group 'applications
+  :link '(url-link :tag "Github" "https://github.com/nlamirault/dionysos")
+  :link '(emacs-commentary-link :tag "Commentary" "dionysos"))
+
+
+(provide 'dionysos-custom)
+;;; dionysos-custom.el ends here

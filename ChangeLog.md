@@ -2,7 +2,7 @@
 
 # Version 0.2.0 (IN PROGRESS)
 
-- Manage volume
+- [GH-6][]: Manage volume
 - [GH-2][]: MPlayer backend
 
 
@@ -20,3 +20,4 @@
 
 [GH-1]: https://github.com/nlamirault/dionysos/issues/1
 [GH-2]: https://github.com/nlamirault/dionysos/issues/2
+[GH-6]: https://github.com/nlamirault/dionysos/issues/6
