@@ -1,6 +1,6 @@
 # dionysos ChangeLog
 
-# Version 0.3.0 (18/03/2015)
+# Version 0.3.0 (20/03/2015)
 
 - Add MPD mode to display current playlist
 - Add MPD backend
