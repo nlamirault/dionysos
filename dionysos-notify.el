@@ -1,4 +1,4 @@
-;;; Dionysos Cask file
+;;; dionysos-notify.el --- Dionysos notifications system
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -17,21 +17,33 @@
 ;; Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 ;; 02110-1301, USA.
 
-(source "melpa" "http://melpa.milkbox.net/packages/")
-(source "gnu" "http://elpa.gnu.org/packages/")
-(source "marmalade" "http://marmalade-repo.org/packages/")
+;;; Commentary:
 
-(package-file "dionysos.el")
-(files "dionysos*.el" (:exclude ".dir-locals.el"))
+;;; Code:
 
-;; Development
-(development
- (depends-on "libmpdee" "2.1.0")
- (depends-on "alert" "1.2")
- (depends-on "f" "0.17.2")
- (depends-on "s" "1.9.0")
- (depends-on "ansi" "0.4.0")
- (depends-on "pkg-info" "0.5.0")
- (depends-on "ert")
- (depends-on "ert-runner" "0.6.4")
- (depends-on "undercover" "0.4.0"))
+
+(require 'alert)
+
+(require 'dionysos-custom)
+
+(defcustom dionysos-notify-p t
+  "Send notifications or not."
+  :type 'boolean
+  :group 'dionysos)
+
+(setq alert-default-style 'libnotify)
+
+(defun dionysos--notify (message category)
+  "Send a notification.
+Content is `MESSAGE'.
+`CATEGORY' is used to classify notifications."
+  (when dionysos-notify-p
+    (alert message
+           :title "Dionysos"
+           :style 'libnotify
+           :category category)))
+
+
+
+(provide 'dionysos-notify)
+;;; dionysos-notify.el ends here
