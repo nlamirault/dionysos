@@ -24,6 +24,7 @@
 (require 'libmpdee)
 
 (require 'dionysos-backend)
+(require 'dionysos-custom)
 (require 'dionysos-process)
 
 (dionysos--define-backend mpd
