@@ -25,6 +25,7 @@
 
 (require 'dionysos-backend)
 (require 'dionysos-custom)
+(require 'dionysos-notify)
 (require 'dionysos-process)
 
 (dionysos--define-backend mpd
@@ -64,6 +65,7 @@
 
 
 (defun dionysos--mpd-status ()
+
   (with-mpd
    (mpd-get-status dionysos--mpd-con)))
 
@@ -75,7 +77,13 @@
    (dionysos--mpd-connect)
    (if song-id
        (mpd-play dionysos--mpd-con song-id t)
-     (mpd-play dionysos--mpd-con))))
+     (mpd-play dionysos--mpd-con))
+   (let ((song (mpd-get-current-song dionysos--mpd-con)))
+     (dionysos--notify
+      (format "%s\n%s"
+              (dionysos--plist-get song 'Title)
+              (dionysos--plist-get song 'Artist))
+      'info))))
 
 
 (defun dionysos--mpd-stop ()
@@ -117,6 +125,9 @@
 
 
 (defun dionysos--plist-get (plist prop)
+  "Extract a value from the property list or return an empty string.
+`PLIST' is the property list
+`PROP' is the key"
   (let ((data (plist-get plist prop)))
     (if data
         data
