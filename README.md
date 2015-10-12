@@ -4,11 +4,11 @@
 [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
 
 Master :
-* [![MELPA Stable](http://stable.melpa.org/packages/gotest-badge.svg)](http://stable.melpa.org/#/gotest)
+* [![MELPA Stable](http://stable.melpa.org/packages/dionysos-badge.svg)](http://stable.melpa.org/#/dionysos)
 * [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master)
 
 Develop:
-* [![Melpa Status](http://melpa.milkbox.net/packages/gotest-badge.svg)](http://melpa.milkbox.net/#/gotest)
+* [![Melpa Status](http://melpa.milkbox.net/packages/dionysos-badge.svg)](http://melpa.milkbox.net/#/dionysos)
 * [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop)
 
 
