@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+# Copyright (C) 2014, 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -13,9 +13,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-APP = dionysos
-
-SHELL = /bin/bash
+APP = dionysos 
 
 EMACS ?= emacs
 EMACSFLAGS = -L .
@@ -30,7 +28,6 @@ VERSION=$(shell \
 PACKAGE_FOLDER=$(APP)-$(VERSION)
 ARCHIVE=$(PACKAGE_FOLDER).tar
 
-#ELS = $(wildcard *.el)
 ELS = $(shell find . -name "*.el")
 OBJECTS = $(ELS:.el=.elc)
 
@@ -41,22 +38,18 @@ WARN_COLOR=\033[33;01m
 
 all: help
 
-.PHONY: help
 help:
 	@echo -e "$(OK_COLOR)==== $(APP) [$(VERSION)]====$(NO_COLOR)"
-	@echo -e "$(WARN_COLOR)- init$(NO_COLOR)    : initialize environment"
+	@echo -e "$(WARN_COLOR)- init$(NO_COLOR)    : initialize development environment"
 	@echo -e "$(WARN_COLOR)- build$(NO_COLOR)   : build project"
 	@echo -e "$(WARN_COLOR)- test$(NO_COLOR)    : launch unit tests"
 	@echo -e "$(WARN_COLOR)- clean$(NO_COLOR)   : cleanup"
 	@echo -e "$(WARN_COLOR)- package$(NO_COLOR) : packaging"
 
-.PHONY: init
 init:
 	@echo -e "$(OK_COLOR)[$(APP)] Initialize environment$(NO_COLOR)"
-	@echo -e "Emacs version : $(EMACS) --version"
 	@$(CASK) --dev install
 
-.PHONY: elpa
 elpa:
 	@echo -e "$(OK_COLOR)[$(APP)] Build$(NO_COLOR)"
 	@$(CASK) install
@@ -64,19 +57,16 @@ elpa:
 	@touch $@
 
 .PHONY: build
-#build : elpa $(OBJECTS)
-build: elpa
-	@$(CASK) build
+build : elpa $(OBJECTS)
 
-.PHONY: test
-test:
+test: build
 	@echo -e "$(OK_COLOR)[$(APP)] Unit tests$(NO_COLOR)"
 	@$(CASK) exec ert-runner
 
 .PHONY: virtual-test
 virtual-test: check-env
 	@$(VAGRANT) up
-	@$(VAGRANT) ssh -c "make -C /vagrant EMACS=$(EMACS) clean init test"
+	@$(VAGRANT) ssh -c "source /tmp/.emacs-dionysos.rc && make -C /vagrant EMACS=$(EMACS) clean init test"
 
 .PHONY: virtual-clean
 virtual-clean:
