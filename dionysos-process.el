@@ -39,19 +39,19 @@
                     nil
                     command
                     arguments)))
-        (lexical-let
-            ((after-fn hook))
-          (set-process-sentinel process
-                                (lambda (process event)
-                                  (when (memq (process-status process)
-                                              '(exit signal))
-                                    (message "Process End %s %s %s"
-                                             (process-name process)
-                                             event
-                                             (process-exit-status process))
-                                    (when (and (= 0 (process-exit-status process))
-                                               after-fn)
-                                      (funcall after-fn))))))))))
+        ;; (lexical-let
+        ;;     ((after-fn hook))
+        (set-process-sentinel process
+                              (lambda (process event)
+                                (when (memq (process-status process)
+                                            '(exit signal))
+                                  (message "Process End %s %s %s"
+                                           (process-name process)
+                                           event
+                                           (process-exit-status process))
+                                  (when (and (= 0 (process-exit-status process))
+                                             hook)
+                                    (funcall hook)))))))))
 
 
 (defun dionysos--kill-process (process-name)
