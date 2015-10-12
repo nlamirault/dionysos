@@ -1,10 +1,18 @@
 # dionysos
 
-[![travis][badge-travis]][travis]
-[![drone][badge-drone]][drone]
-[![Melpa Status](http://melpa.milkbox.net/packages/dionysos-badge.svg)](http://melpa.milkbox.net/#/dionysos)
-[![MELPA Stable](http://stable.melpa.org/packages/dionysos-badge.svg)](http://stable.melpa.org/#/dionysos)
-[![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png)](https://coveralls.io/r/nlamirault/dionysos)
+[![License GPL 2][badge-license]][LICENSE]
+[![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
+
+Master :
+* [![MELPA Stable](http://stable.melpa.org/packages/gotest-badge.svg)](http://stable.melpa.org/#/gotest)
+* [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master)
+
+Develop:
+* [![Melpa Status](http://melpa.milkbox.net/packages/gotest-badge.svg)](http://melpa.milkbox.net/#/gotest)
+* [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop)
+
+
+
 
 `dionysos` is a simple music player for Emacs.
 Backends available are : [vlc][], [mplayer][]
@@ -109,10 +117,6 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [dionysos]: https://github.com/nlamirault/dionysos
 [badge-license]: https://img.shields.io/badge/license-GPL_2-green.svg?style=flat
 [LICENSE]: https://github.com/nlamirault/dionysos/blob/master/LICENSE
-[travis]: https://travis-ci.org/nlamirault/dionysos
-[badge-travis]: http://img.shields.io/travis/nlamirault/dionysos.svg?style=flat
-[badge-drone]: https://drone.io/github.com/nlamirault/dionysos/status.png
-[drone]: https://drone.io/github.com/nlamirault/dionysos/latest
 [Issue tracker]: https://github.com/nlamirault/dionysos/issues
 
 [GNU Emacs]: https://www.gnu.org/software/emacs/
