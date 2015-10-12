@@ -2,10 +2,6 @@ machine:
   services:
     - docker
 
-  # Add some environment variables
-  environment:
-    - PATH: $PATH:${HOME}/.cask/bin
-
 dependencies:
   pre:
     - sudo add-apt-repository -y ppa:cassou/emacs
