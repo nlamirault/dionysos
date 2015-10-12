@@ -15,6 +15,8 @@
 
 APP = dionysos 
 
+SHELL = /bin/bash
+
 EMACS ?= emacs
 EMACSFLAGS = -L .
 CASK = cask
