@@ -2,10 +2,10 @@
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; URL: https://github.com/nlamirault/dionysos
-;; Version: 0.3.0
+;; Version: 0.4.0
 ;; Keywords: music
 
-;; Package-Requires: ((libmpdee "2.1.0") (s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0"))
+;; Package-Requires: ((libmpdee "2.1.0") (alert "1.2") (s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0"))
 
 ;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -46,6 +46,7 @@
 (require 'dionysos-custom)
 (require 'dionysos-version)
 (require 'dionysos-io)
+(require 'dionysos-notify)
 (require 'dionysos-process)
 (require 'dionysos-ui)
 (require 'dionysos-backend)

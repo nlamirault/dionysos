@@ -85,7 +85,7 @@ env:
 ###
 
 before_install:
-#   - git submodule --quiet update --init --recursive
+    - sudo apt-get update
     - sudo apt-get install vlc mplayer
 
 install:

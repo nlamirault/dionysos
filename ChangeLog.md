@@ -1,16 +1,22 @@
-# dionysos ChangeLog
+Dionysos ChangeLog
+============================
 
-# Version 0.3.0 (20/03/2015)
+# Version 0.4.0 (10/12/2015)
+
+- Setup continuous integration
+- Add notification system
+
+# Version 0.3.0 (03/20/2015)
 
 - Add MPD mode to display current playlist
 - Add MPD backend
 
-# Version 0.2.0 (03/02/2015)
+# Version 0.2.0 (02/03/2015)
 
 - [GH-6][]: Manage volume
 - [GH-2][]: MPlayer backend
 
-# Version 0.1.0 (15/01/2015)
+# Version 0.1.0 (01/15/2015)
 
 - Init files mode (directory listing)
 - [GH-1][]: Add VLC backend

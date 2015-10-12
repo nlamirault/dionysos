@@ -31,7 +31,13 @@
   :type 'boolean
   :group 'dionysos)
 
-(setq alert-default-style 'libnotify)
+
+(cond
+ ((eq system-type 'gnu/linux)
+  (setq alert-default-style 'libnotify))
+ ((eq system-type 'darwin)
+  (setq alert-default-style 'notifier)))
+
 
 (defun dionysos--notify (message category)
   "Send a notification.
