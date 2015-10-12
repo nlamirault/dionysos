@@ -43,6 +43,8 @@
 
 ;; Customization
 
+(require 'cl)
+
 (require 'dionysos-custom)
 (require 'dionysos-version)
 (require 'dionysos-io)
