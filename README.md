@@ -97,7 +97,6 @@ management. Install it and retrieve dependencies :
 See [here](CONTRIBUTING.md)
 
 
-
 ## Changelog
 
 A changelog is available [here](ChangeLog.md).
