@@ -23,7 +23,7 @@
 
 (require 'cl-lib)
 (require 'f)
-
+(require 's)
 
 (require 'dionysos-backend)
 (require 'dionysos-mode)
@@ -39,7 +39,7 @@
              filename (type-of filename) dionysos-backend)
     (if dionysos-backend
         (funcall (dionysos--backend-start dionysos-backend)
-                 (string-trim filename)
+                 (s-trim filename)
                  'next-action)
       (message "Dionysos: no backend specify."))))
 
