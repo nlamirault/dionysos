@@ -4,11 +4,11 @@
 [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
 
 Master :
-* [![MELPA Stable](http://stable.melpa.org/packages/dionysos-badge.svg)](http://stable.melpa.org/#/dionysos)
+* [![MELPA Stable](https://stable.melpa.org/packages/dionysos-badge.svg)](https://stable.melpa.org/#/dionysos)
 * [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master)
 
 Develop:
-* [![Melpa Status](http://melpa.milkbox.net/packages/dionysos-badge.svg)](http://melpa.milkbox.net/#/dionysos)
+* [![Melpa Status](https://melpa.org/packages/dionysos-badge.svg)](https://melpa.org/#/dionysos)
 * [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop)
 
 
@@ -119,7 +119,7 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [Issue tracker]: https://github.com/nlamirault/dionysos/issues
 
 [GNU Emacs]: https://www.gnu.org/software/emacs/
-[MELPA]: http://melpa.milkbox.net/
+[MELPA]: https://melpa.org
 [Cask]: http://cask.github.io/
 
 [Overseer]: https://github.com/tonini/overseer.el
