@@ -1,6 +1,6 @@
 ;;; dionysos-backend-mplayer-test.el --- Tests for Dionysos MPlayer backend
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 ;;; Code:
 
 (ert-deftest test-dionysos-backend-mplayer ()
+  :tags '(backend mplayer)
   (with-test-sandbox
    (should (dionysos--get-backend 'mplayer))
    (should (custom-variable-p 'dionysos-mplayer-command))
@@ -29,13 +30,15 @@
 
 
 (ert-deftest test-dionysos-backend-mplayer-play-mp3 ()
+  :tags '(backend mplayer)
   (with-test-sandbox
-   (with-music-file
-    "resources/Roulement_tambour-01.mp3"
-    (dionysos--mplayer-start file)
-    (should (equal 'run (dionysos--status-process dionysos--process-name)))
-    (dionysos--mplayer-stop)
-    (should (equal nil (dionysos--status-process dionysos--process-name))))))
+   (when (executable-find "mplayer")
+     (with-music-file
+      "resources/Roulement_tambour-01.mp3"
+      (dionysos--mplayer-start file)
+      (should (equal 'run (dionysos--status-process dionysos--process-name)))
+      (dionysos--mplayer-stop)
+      (should (equal nil (dionysos--status-process dionysos--process-name)))))))
 
 
 (provide 'dionysos-backend-mplayer-test)

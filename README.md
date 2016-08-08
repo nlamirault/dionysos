@@ -1,21 +1,12 @@
-# dionysos
+# Dionysos
 
 [![License GPL 2][badge-license]][LICENSE]
-[![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
 
-Master :
-* [![MELPA Stable](https://stable.melpa.org/packages/dionysos-badge.svg)](https://stable.melpa.org/#/dionysos)
-* [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master)
-
-Develop:
-* [![Melpa Status](https://melpa.org/packages/dionysos-badge.svg)](https://melpa.org/#/dionysos)
-* [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop)
-
-
-
+* Master : * [![MELPA Stable](https://stable.melpa.org/packages/dionysos-badge.svg)](https://stable.melpa.org/#/dionysos) [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master) [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
+* Develop: [![Melpa Status](https://melpa.org/packages/dionysos-badge.svg)](https://melpa.org/#/dionysos) [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop) [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=develop)](https://coveralls.io/r/nlamirault/dionysos?branch=develop)
 
 `dionysos` is a simple music player for Emacs.
-Backends available are : [vlc][], [mplayer][]
+Backends available are : [vlc][], [mplayer][] and [mpd][]
 
 ## Installation
 
@@ -27,31 +18,44 @@ or [Cask][]:
 
 	(depends-on "dionysos")
 
-## Usage
 
-### Backend
+## Customization
+
+```lisp
+(setq dionysos-backend 'vlc
+      dionysos-notify-p t
+      dionysos-volume-cmd 'pamixer)
+```
+
+## Backend
 
 You could use this backends : **vlc**, **mplayer** and **mpd**.
 Setup your backend :
 
-    (setq dionysos-backend 'vlc)
+```lisp
+(setq dionysos-backend 'vlc)
+```
 
-### Directory listing
+## Modes
+
+### Filesystem
 
 Listen to music files in a directory :
 
-    M-x dionysos-files
+    M-x dionysos-fs-list
 
 Keybinding           | Description
 ---------------------|------------------------------------------------------------
-<kbd>RET</kbd>       | start playing file from the current line
+<kbd>c</kbd>         | start playing current position
 <kbd>SPACE</kbd>     | stop music player
 <kbd>n</kbd>         | play next song
 <kbd>p</kbd>         | play previous song
 <kbd>+</kbd>         | raise volume
 <kbd>-</kbd>         | lower volume
+<kbd>q</kbd>         | quit
 
-### Playlist using MPD
+
+### MPD
 
 You could play songs from MPD playlist :
 
@@ -70,26 +74,43 @@ Keybinding           | Description
 <kbd>SPC</kbd>       | Stop playing
 <kbd>+</kbd>         | Raise volume
 <kbd>-</kbd>         | Decrease volume
+<kbd>q</kbd>         | quit
 
 ## Development
 
 ### Cask
 
-``dionysos`` use [Cask][] for dependencies
-management. Install it and retrieve dependencies :
+``dionysos`` use [Cask][] for dependencies management. Install it and retrieve
+dependencies :
 
     $ curl -fsSkL https://raw.github.com/cask/cask/master/go | python
     $ export PATH="$HOME/.cask/bin:$PATH"
     $ cask
 
+### Testing
 
-### Tests
-
-* Launch unit tests from shell:
+* Launch unit tests from shell
 
         $ make clean test
 
-* You could use [Overseer][] to launch unit tests from Emacs
+* Using [overseer][] :
+
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>C-c , t</kbd>   | launch unit tests from buffer
+<kbd>C-c , b</kbd>   | launch unit tests
+<kbd>C-c , g</kbd>   | launch unit tests with tag (find, regexp, ...)
+
+* Tips:
+
+If you want to launch a single unit test, add a specify tag :
+
+```lisp
+(ert-deftest test-foobar ()
+  :tags '(current)
+  ```
+
+And launch it using : <kbd>C-c , g</kbd> and specify tag : *current*
 
 
 ## Support / Contribute
@@ -121,7 +142,8 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [GNU Emacs]: https://www.gnu.org/software/emacs/
 [MELPA]: https://melpa.org
 [Cask]: http://cask.github.io/
-
 [Overseer]: https://github.com/tonini/overseer.el
+
 [vlc]: http://www.videolan.org/vlc/
 [mplayer]: http://www.mplayerhq.hu/design7/news.html
+[mpd]: https://www.musicpd.org/

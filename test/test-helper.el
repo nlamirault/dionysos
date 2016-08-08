@@ -1,6 +1,6 @@
 ;; test-helper.el --- Test helpers for dionysos.el
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; Homepage: https://github.com/nlamirault/dionysos
@@ -80,18 +80,11 @@
   "Evaluate BODY in an empty sandbox directory."
   `(unwind-protect
        (condition-case nil ;ex
-           (let (;;(user-emacs-directory dionysos-sandbox-path)
-                 (default-directory dionysos-source-dir))
-             ;; (unless (f-dir? dionysos-sandbox-path)
-             ;;   (f-mkdir dionysos-sandbox-path))
+           (let ((default-directory dionysos-source-dir))
              (cleanup-load-path)
              (load-library "/dionysos.el")
              (setup-dionysos)
-             ,@body)
-         ;; (f-delete overseer-sandbox-path :force)))
-         )))
-         ;; (error
-         ;;  (message (ansi-red "[dionysos] Error during unit tests : %s" ex))))))
+             ,@body))))
 
 
 (provide 'test-helper)

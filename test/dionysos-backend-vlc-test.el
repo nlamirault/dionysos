@@ -1,6 +1,6 @@
 ;;; dionysos-backend-vlc-test.el --- Tests for Dionysos VLC backend
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 ;;; Code:
 
 (ert-deftest test-dionysos-backend-vlc ()
+  :tags '(backend vlc)
   (with-test-sandbox
    (should (dionysos--get-backend 'vlc))
    (should (custom-variable-p 'dionysos-vlc-command))
@@ -29,14 +30,17 @@
 
 
 (ert-deftest test-dionysos-backend-vlc-start-process ()
+  :tags '(backend vlc)
   (with-test-sandbox
    (should (eql 'dionysos--vlc-start (dionysos--backend-start 'vlc)))))
 
 (ert-deftest test-dionysos-backend-vlc-stop-process ()
+  :tags '(backend vlc)
   (with-test-sandbox
    (should (equal 'dionysos--vlc-stop (dionysos--backend-stop 'vlc)))))
 
 (ert-deftest test-dionysos-backend-vlc-play-mp3 ()
+  :tags '(backend vlc)
   (with-test-sandbox
    (with-music-file
     "resources/Roulement_tambour-01.mp3"
