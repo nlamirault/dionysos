@@ -1,6 +1,6 @@
 ;;; Dionysos Cask file
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -27,8 +27,9 @@
 (development
  (depends-on "libmpdee" "2.1.0")
  (depends-on "alert" "1.2")
- (depends-on "f" "0.17.2")
- (depends-on "s" "1.9.0")
+ (depends-on "f" "0.18.2")
+ (depends-on "s" "1.11.0")
+ (depends-on "dash" "2.12.1")
  (depends-on "ansi" "0.4.0")
  (depends-on "pkg-info" "0.5.0")
  (depends-on "ert")

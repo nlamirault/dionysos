@@ -1,6 +1,6 @@
 ;;; dionysos-process.el --- some tools
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -49,9 +49,9 @@
                                            (process-name process)
                                            event
                                            (process-exit-status process))
-                                  (when (and (= 0 (process-exit-status process))
-                                             hook)
-                                    (funcall hook)))))))))
+                                  (when (= 0 (process-exit-status process))
+                                    (when hook
+                                        (funcall hook))))))))))
 
 
 (defun dionysos--kill-process (process-name)

@@ -1,6 +1,6 @@
 ;;; dionysos-backend.el --- Dionysos music backend
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -75,6 +75,12 @@
   (let ((backend (dionysos--get-backend name)))
     (when backend
       (cdr (assoc 'stop backend)))))
+
+
+(defmacro dionysos--with-backend (&rest body)
+  `(if dionysos-backend
+       ,@body
+     (message "Dionysos: no backend specify.")))
 
 
 

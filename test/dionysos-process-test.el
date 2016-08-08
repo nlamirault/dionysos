@@ -1,6 +1,6 @@
 ;;; dionysos-process-test.el --- Tests for process information
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 ;;; Code:
 
 (ert-deftest test-dionysos-process-cant-create-multiple-process ()
-  :tags '(current)
+  :tags '(process)
   (with-test-sandbox
    (with-music-file
     "resources/France.mp3"
@@ -35,6 +35,7 @@
 
 
 (ert-deftest test-dionysos-process-can-start-process ()
+  :tags '(process)
   (with-test-sandbox
    (with-music-file
     "resources/Roulement_tambour-01.mp3"

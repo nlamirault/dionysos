@@ -1,6 +1,6 @@
 ;;; dionysos-backend-mpd-test.el --- Tests for Dionysos MPD backend
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 ;;; Code:
 
 (ert-deftest test-dionysos-backend-mpd ()
+  :tags '(backend mpd)
   (with-test-sandbox
    (should (dionysos--get-backend 'mpd))
    (should (string-equal "localhost" dionysos-mpd-host))

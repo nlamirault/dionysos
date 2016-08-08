@@ -1,6 +1,6 @@
 ;;; dionysos-mpd-mode.el --- Dionysos MPD mode
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@
 
 ;; Faces
 
-(defgroup dionysos-mpd-mode-faces '((sx-user custom-group))
+(defgroup dionysos-mpd-mode-faces '((dionysos-mpd-mode custom-group))
   "Customization group for the faces of `dionysos-mpd-mode'."
   :prefix "dionysos-mpd-mode-"
   :tag "Dionysos MPD Mode Faces"
@@ -142,7 +142,7 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
 
 
 (defun dionysos--render-song (song)
-  "Render a `SONG' to the Dionysos MPD buffer."
+  "Render a `SONG' to the Dionysos buffer."
   ;;(message "Song: %s" song)
   (dionysos--render-row
    (format "%s %s"
@@ -188,12 +188,12 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
   (dionysos--mpd-stop))
 
 (defun dionysos-current-media ()
-  "Return the current SoundCloud track at point."
+  "Return the current track at point."
   (get-text-property (point) :dionysos-media))
 
 
 (defun dionysos-next-media ()
-  "Move point to the next SoundCloud track."
+  "Move point to the next track."
   (interactive)
   (let ((pos (next-single-property-change (point) :dionysos-media)))
     (when pos
@@ -204,7 +204,7 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
 
 
 (defun dionysos-prev-media ()
-  "Move point to the next SoundCloud track."
+  "Move point to the next track."
   (interactive)
   (let ((pos (previous-single-property-change (point) :dionysos-media)))
     (when pos

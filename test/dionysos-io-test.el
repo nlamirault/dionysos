@@ -1,6 +1,6 @@
 ;;; dionysos-io-test.el --- Tests for io information
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -21,14 +21,15 @@
 
 ;;; Code:
 
-
 (ert-deftest test-dionysos-list-directory ()
+  :tags '(io)
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources"))))
      (should (= 5 (length files))))))
 
 (ert-deftest test-dionysos-list-directory-simple-filter ()
+  :tags '(io)
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources")
@@ -36,6 +37,7 @@
      (should (= 3 (length files))))))
 
 (ert-deftest test-dionysos-list-directory-multiple-filters ()
+  :tags '(io)
   (with-test-sandbox
    (let ((files (dionysos--list-directory
                  (f-join dionysos-testsuite-dir "resources")

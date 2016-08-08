@@ -1,6 +1,6 @@
 ;;; dionysos-backend-vlc.el --- Dionysos VLC backend
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@
 ;;; Code:
 
 (require 'dionysos-backend)
+(require 'dionysos-notify)
 (require 'dionysos-process)
 
 (dionysos--define-backend vlc
@@ -37,6 +38,8 @@
 `FILENAME' using VLC.
 `HOOK' is for next action."
   (message "Create process %s" filename)
+  (dionysos--notify
+   (format "%s\n" (file-name-base filename))'info)
   (dionysos--create-process dionysos--process-name
                             dionysos-vlc-command
                             (append '("--intf" "rc") (list filename) '("vlc://quit"))

@@ -2,12 +2,12 @@
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; URL: https://github.com/nlamirault/dionysos
-;; Version: 0.4.0
+;; Version: 0.5.0
 ;; Keywords: music
 
-;; Package-Requires: ((libmpdee "2.1.0") (alert "1.2") (s "1.9.0") (dash "2.9.0") (pkg-info "0.5.0") (cl-lib "0.5"))
+;; Package-Requires: ((libmpdee "2.1.0") (alert "1.2") (s "1.11.0") (dash "2.12.1") (pkg-info "0.5.0") (cl-lib "0.5"))
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -30,14 +30,17 @@
 
 ;;; Installation:
 
-;; Available as a package in melpa.milkbox.net.
-
+;; dionysos is available on the two major community maintained repositories
+;; Melpa stable (https://stable.melpa.org), and Melpa (https://melpa.org)
+;;
 ;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;              '("melpa" . "https://melpa.org/packages/") t)
 ;;
 ;; M-x package-install dionysos
 
 ;;; Usage:
+;;
+;; M-x dionysos-fs-list
 
 ;;; Code:
 
@@ -57,8 +60,7 @@
 (require 'dionysos-backend-mpd)
 (require 'dionysos-volume)
 (require 'dionysos-mode)
-(require 'dionysos-directory-mode)
-(require 'dionysos-files-mode)
+(require 'dionysos-fs-mode)
 (require 'dionysos-mpd-mode)
 
 (provide 'dionysos)

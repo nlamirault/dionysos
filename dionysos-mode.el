@@ -1,6 +1,6 @@
 ;;; dionysos-mode.el --- Dionysos mode
 
-;; Copyright (C) 2015 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License
@@ -35,6 +35,30 @@
   (setq major-mode 'dionysos-mode)
   (setq mode-name "Dionysos")
   (run-mode-hooks 'dionysos-mode-hook))
+
+(defun dionysos--mode-current-media ()
+  "Return the current track at point."
+  (get-text-property (point) :dionysos-media))
+
+(defun dionysos--mode-next-media ()
+  "Move point to the next track."
+  (interactive)
+  (let ((pos (next-single-property-change (point) :dionysos-media)))
+    (when pos
+      (goto-char pos)
+      (unless (dionysos--mode-current-media)
+	(let ((pos (next-single-property-change pos :dionysos-media)))
+	  (if pos (goto-char pos)))))))
+
+(defun dionysos--mode-prev-media ()
+  "Move point to the next track."
+  (interactive)
+  (let ((pos (previous-single-property-change (point) :dionysos-media)))
+    (when pos
+      (goto-char pos)
+      (unless (dionysos--mode-current-media)
+	(let ((pos (previous-single-property-change pos :dionysos-media)))
+	  (if pos (goto-char pos)))))))
 
 
 (provide 'dionysos-mode)
