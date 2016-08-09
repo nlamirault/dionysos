@@ -6,6 +6,7 @@
 * Develop: [![Melpa Status](https://melpa.org/packages/dionysos-badge.svg)](https://melpa.org/#/dionysos) [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop) [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=develop)](https://coveralls.io/r/nlamirault/dionysos?branch=develop)
 
 ![dionysos](dionysos.png)
+
 A simple music player for Emacs.
 
 Backends available are :
