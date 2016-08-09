@@ -61,7 +61,7 @@ Keybinding           | Description
 <kbd>-</kbd>         | lower volume
 <kbd>q</kbd>         | quit
 
-[MPD FS!](var/dionysos-fs-0.6.png)
+![Filesystem](var/dionysos-fs-0.6.png)
 
 ### MPD
 
@@ -69,7 +69,7 @@ You could play songs from MPD playlist :
 
     M-x dionysos-mpd-playlist
 
-[MPD Playlist!](var/dionysos-mpd-0.3.png)
+![MPD](var/dionysos-mpd-0.3.png)
 
 In this mode, you could use manage MPD :
 
