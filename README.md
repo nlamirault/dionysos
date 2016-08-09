@@ -5,7 +5,8 @@
 * Master : [![MELPA Stable](https://stable.melpa.org/packages/dionysos-badge.svg)](https://stable.melpa.org/#/dionysos) [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/master.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/master) [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=master)](https://coveralls.io/r/nlamirault/dionysos?branch=master)
 * Develop: [![Melpa Status](https://melpa.org/packages/dionysos-badge.svg)](https://melpa.org/#/dionysos) [![Circle CI](https://circleci.com/gh/nlamirault/dionysos/tree/develop.svg?style=svg)](https://circleci.com/gh/nlamirault/dionysos/tree/develop) [![Coverage Status](https://coveralls.io/repos/nlamirault/dionysos/badge.png?branch=develop)](https://coveralls.io/r/nlamirault/dionysos?branch=develop)
 
-![dionysos](dionysos.png) `dionysos` is a simple music player for Emacs.
+![dionysos](dionysos.png)
+A simple music player for Emacs.
 
 Backends available are :
 * [vlc][]
