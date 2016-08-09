@@ -101,35 +101,46 @@
   "Start playing song."
   (interactive)
   (let ((song (dionysos--mode-current-media)))
-    (when song
-      (when dionysos-backend
-          (funcall (dionysos--backend-start dionysos-backend)
-                   (s-trim song)
-                   'dionysos--fs-mode-next-action)))))
+    (if song
+        (dionysos--with-backend
+         (funcall (dionysos--backend-start dionysos-backend)
+                  (s-trim song)
+                  'dionysos--fs-mode-next-action))
+      (message "[dionysos-fs] No song available"))))
 
 (defun dionysos--fs-mode-stop ()
   "Stop playing song."
   (interactive)
-  (funcall (dionysos--backend-stop dionysos-backend)))
+  (dionysos--with-backend
+   (funcall (dionysos--backend-stop dionysos-backend))))
 
 (defun dionysos--fs-mode-next ()
   "Play next song."
   (interactive)
-  (dionysos--mode-next-media)
-  (dionysos--fs-mode-stop)
-  (dionysos--fs-mode-start))
+  (dionysos--with-backend
+   (dionysos--mode-next-media)
+   (dionysos--fs-mode-stop)
+   (dionysos--fs-mode-start)))
 
 (defun dionysos--fs-mode-previous ()
   "Play previous song."
   (interactive)
-  (dionysos--mode-prev-media)
-  (dionysos--fs-mode-stop)
-  (dionysos--fs-mode-start))
+  (dionysos--with-backend
+   (dionysos--mode-prev-media)
+   (dionysos--fs-mode-stop)
+   (dionysos--fs-mode-start)))
+
+(defun dionysos--fs-mode-pause ()
+  "Pause playing song."
+  (interactive)
+  (dionysos--with-backend
+   (funcall (dionysos--backend-pause dionysos-backend))))
 
 (defun dionysos--fs-mode-quit ()
   "Stop player and exit."
   (interactive)
-  (dionysos--fs-mode-stop)
+  (dionysos--with-backend
+   (dionysos--fs-mode-stop))
   (kill-buffer dionysos-fs-mode-buffer))
 
 (defun dionysos--fs-mode-next-action ()
@@ -233,12 +244,14 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
   (let ((map (make-keymap)))
     (define-key map (kbd "p") 'dionysos--fs-mode-previous)
     (define-key map (kbd "n") 'dionysos--fs-mode-next)
-    (define-key map (kbd "c") 'dionysos--fs-mode-start)
+    (define-key map (kbd "s") 'dionysos--fs-mode-start)
+    (define-key map (kbd "SPC") 'dionysos--fs-mode-stop)
+    (define-key map (kbd "P") 'dionysos--fs-mode-pause)
     (define-key map (kbd "q") 'dionysos--fs-mode-quit)
     (define-key map (kbd "+") 'dionysos-volume-raise)
     (define-key map (kbd "-") 'dionysos-volume-decrease)
-    (define-key map (kbd "s") 'dionysos--fs-mode-start)
-    (define-key map (kbd "SPC") 'dionysos--fs-mode-stop)
+
+
     map)
   "Keymap for `dionysos--fs-mode' major mode.")
 
