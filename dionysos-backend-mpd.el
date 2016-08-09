@@ -78,6 +78,7 @@
        (mpd-play dionysos--mpd-con song-id t)
      (mpd-play dionysos--mpd-con))
    (let ((song (mpd-get-current-song dionysos--mpd-con)))
+     (message "[dionysos-mpd] Start %s" song)
      (dionysos--notify
       (format "%s\n%s"
               (dionysos--plist-get song 'Title)
@@ -88,18 +89,21 @@
 (defun dionysos--mpd-stop ()
   "Stop MPD playing song."
   (with-mpd
+   (message "[dionysos-mpd] Stop")
    (mpd-stop dionysos--mpd-con)))
 
 
 (defun dionysos--mpd-prev ()
   "Read previous song."
   (with-mpd
+   (message "[dionysos-mpd] Previous")
    (mpd-prev dionysos--mpd-con)))
 
 
 (defun dionysos--mpd-next ()
   "Read next song."
   (with-mpd
+   (message "[dionysos-mpd] Next")
    (mpd-next dionysos--mpd-con)))
 
 

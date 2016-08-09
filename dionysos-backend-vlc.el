@@ -37,7 +37,7 @@
   "Start playing music.
 `FILENAME' using VLC.
 `HOOK' is for next action."
-  (message "Create process %s" filename)
+  (message "[dionysos-vlc] Start %s Next %s" filename hook)
   (dionysos--notify
    (format "%s\n" (file-name-base filename))'info)
   (dionysos--create-process dionysos--process-name
@@ -48,6 +48,7 @@
 
 (defun dionysos--vlc-stop ()
   "Stop VLC process."
+  (message "[dionysos-vlc] Stop")
   (dionysos--kill-process dionysos--process-name))
 
 (provide 'dionysos-backend-vlc)
