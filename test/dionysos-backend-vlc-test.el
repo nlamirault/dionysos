@@ -39,6 +39,11 @@
   (with-test-sandbox
    (should (equal 'dionysos--vlc-stop (dionysos--backend-stop 'vlc)))))
 
+(ert-deftest test-dionysos-backend-vlc-pause-process ()
+  :tags '(backend vlc)
+  (with-test-sandbox
+   (should (equal 'dionysos--vlc-pause (dionysos--backend-pause 'vlc)))))
+
 (ert-deftest test-dionysos-backend-vlc-play-mp3 ()
   :tags '(backend vlc)
   (with-test-sandbox

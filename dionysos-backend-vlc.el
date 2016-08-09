@@ -30,6 +30,7 @@
   :command "vlc"
   :filter '("ogg" "mp3" "wav" "flac")
   :start 'dionysos--vlc-start
+  :pause 'dionysos--vlc-pause
   :stop 'dionysos--vlc-stop)
 
 
@@ -50,6 +51,20 @@
   "Stop VLC process."
   (message "[dionysos-vlc] Stop")
   (dionysos--kill-process dionysos--process-name))
+
+
+(defun dionysos--vlc-pause ()
+  "Pause VLC process."
+  (message "[dionysos-vlc] Pause")
+  (dionysos--send-process dionysos--process-name "pause"))
+
+
+(defun dionysos--vlc-seek-to (val)
+  "Send a seek to command to VLC process."
+  (message "[dionysos-vlc] Seek to %s" val)
+  (dionysos--send-process dionysos--process-name (format "seek %d\n" val)))
+
+
 
 (provide 'dionysos-backend-vlc)
 ;;; dionysos-backend-vlc.el ends here

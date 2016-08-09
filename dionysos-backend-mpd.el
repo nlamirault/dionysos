@@ -33,6 +33,7 @@
   :command nil
   :filter '("ogg" "mp3" "wav" "flac")
   :start 'dionysos--mpd-start
+  :pause 'dionysos--mpd-pause
   :stop 'dionysos--mpd-stop)
 
 
@@ -91,6 +92,12 @@
   (with-mpd
    (message "[dionysos-mpd] Stop")
    (mpd-stop dionysos--mpd-con)))
+
+
+(defun dionysos--mpd-stop ()
+  "Pause MPD playing song."
+  (with-mpd
+   (message "[dionysos-mpd] Pause")))
 
 
 (defun dionysos--mpd-prev ()
