@@ -68,11 +68,30 @@
   "Face used on the song render in the Dionysos buffer."
   :group 'dionysos-fs-mode-faces)
 
-(defface dionysos-fs-mode-song-type
+(defface dionysos-fs-mode-song-title
+  '((t :weight bold :inherit font-lock-warning-name-face))
+  "Face used on the song render in the Dionysos buffer."
+  :group 'dionysos-fs-mode-faces)
+
+(defface dionysos-fs-mode-song-artist
   '((t :inherit font-lock-comment-face))
   "Face used on the song render in the Dionysos buffer"
   :group 'dionysos-fs-mode-faces)
 
+(defface dionysos-fs-mode-song-album
+  '((t :inherit font-lock-string-face))
+  "Face used on the song render in the Dionysos buffer"
+  :group 'dionysos-fs-mode-faces)
+
+(defface dionysos-fs-mode-song-track
+  '((t :inherit font-lock-function-name-face))
+  "Face used on the song render in the Dionysos buffer"
+  :group 'dionysos-fs-mode-faces)
+
+(defface dionysos-fs-mode-song-type
+  '((t :inherit font-lock-comment-face))
+  "Face used on the song render in the Dionysos buffer"
+  :group 'dionysos-fs-mode-faces)
 
 ;; ;; ------------------
 ;; ;; Backend I/O
@@ -83,7 +102,7 @@
   (interactive)
   (let ((song (dionysos--mode-current-media)))
     (when song
-      (if dionysos-backend
+      (when dionysos-backend
           (funcall (dionysos--backend-start dionysos-backend)
                    (s-trim song)
                    'dionysos--fs-mode-next-action)))))
@@ -140,25 +159,38 @@
 (defun dionysos--fs-mode-render-row (left right &optional width-right)
   "Render a row with a `LEFT' and a `RIGHT' part.
 Optional argument `WIDTH-RIGHT' is the width of the right argument."
-  (let* ((width-right (or width-right (length (or right ""))))
-	 (width-left (- (dionysos--fs-mode-width)
-			(- width-right 1)
-			(* 2 dionysos-fs-mode-padding)))
-	 (padding (make-string dionysos-fs-mode-padding ?\s)))
-    (widget-insert (format
-		    (format "%s%%-%s.%ss %%%s.%ss%s\n"
-			    padding
-			    width-left width-left
-			    width-right width-right
-			    padding)
-		    left right))))
+  (widget-insert (format "[%s] %s\n" right left)))
+
+(defun dionysos--fs-mode-render-multilines-row (left right left-2 right-2 &optional width-right)
+  "Render a row with a `LEFT' and a `RIGHT' part.
+Optional argument `WIDTH-RIGHT' is the width of the right argument."
+  (widget-insert (format "> %s - %s\n%s / %s\n" left right left-2 right-2)))
 
 (defun dionysos--fs-mode-render-song (song)
   "Render a `SONG' to the Dionysos buffer."
   (message "Song: %s" song)
-  (dionysos--fs-mode-render-row
-   (format "%s" (propertize  (file-name-base song) 'face 'dionysos-fs-mode-song-file))
-   (format "%s" (propertize (file-name-extension song) 'face 'dionysos-fs-mode-song-type))))
+  (if (executable-find "id3")
+      (let* ((tags (dionysos--id3-tag-info song))
+             (track (gethash "Track" tags))
+             (title (gethash "Title" tags))
+             (artist (gethash "Artist" tags))
+             (album (gethash "Album" tags)))
+        (dionysos--fs-mode-render-multilines-row
+         (if track
+             (format "%s" (propertize track 'face 'dionysos-fs-mode-song-track))
+           "")
+         (if title
+             (format "%s" (propertize title 'face 'dionysos-fs-mode-song-title))
+           (format "%s" (propertize (file-name-base song) 'face 'dionysos-fs-mode-song-type)))
+         (if artist
+             (format "%s" (propertize artist 'face 'dionysos-fs-mode-song-artist))
+           "")
+         (if album
+             (format "%s" (propertize album 'face 'dionysos-fs-mode-song-album))
+           "")))
+    (dionysos--fs-mode-render-row
+     (format "%s" (propertize  (file-name-base song) 'face 'dionysos-fs-mode-song-file))
+     (format "%s" (propertize (file-name-extension song) 'face 'dionysos-fs-mode-song-type)))))
 
 
 (defun dionysos--fs-mode-render (songs)
@@ -187,7 +219,7 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
      (let ((inhibit-read-only t))
        (erase-buffer)
        (remove-overlays)
-       (widget-insert (format "\n [%s]\n\n" ,title))
+       (widget-insert (format "\n[%s]\n\n" ,title))
        ,@body)
      (use-local-map widget-keymap)
      (widget-setup)

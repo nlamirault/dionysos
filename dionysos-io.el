@@ -22,9 +22,12 @@
 ;;; Code:
 
 (require 'f)
+(require 's)
+
 
 (defun dionysos--list-directory (directory-name &optional filter)
-  "Insert a new directory `DIRECTORY-NAME' into the dionysos buffer."
+  "Insert a new directory `DIRECTORY-NAME' into the dionysos buffer.
+`FILTER' is used to remove some files."
   (interactive (list (expand-file-name
                       (read-directory-name
                        "Insert directory: " default-directory nil t))))
@@ -34,6 +37,18 @@
       (f-files directory-name)
     (f-files directory-name (lambda (file)
                               (member (f-ext file) filter)))))
+
+
+
+(defun dionysos--id3-tag-info (filename)
+  "Extract ID3 tags from MP3 file using `FILENAME' into an hashtable.."
+  (let ((tags (make-hash-table   :test 'equal)))
+    (mapc (lambda (kv)
+            (let ((data (split-string kv ":")))
+              (puthash (first data) (s-trim (second data)) tags)))
+          (split-string
+           (shell-command-to-string (s-concat "id3 " filename)) "\n" t))
+    tags))
 
 
 
