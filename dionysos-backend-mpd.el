@@ -94,7 +94,7 @@
    (mpd-stop dionysos--mpd-con)))
 
 
-(defun dionysos--mpd-stop ()
+(defun dionysos--mpd-pause ()
   "Pause MPD playing song."
   (with-mpd
    (message "[dionysos-mpd] Pause")))
