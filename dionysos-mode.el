@@ -47,8 +47,8 @@
     (when pos
       (goto-char pos)
       (unless (dionysos--mode-current-media)
-	(let ((pos (next-single-property-change pos :dionysos-media)))
-	  (if pos (goto-char pos)))))))
+        (let ((pos (next-single-property-change pos :dionysos-media)))
+          (if pos (goto-char pos)))))))
 
 (defun dionysos--mode-prev-media ()
   "Move point to the next track."
