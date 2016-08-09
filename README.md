@@ -13,7 +13,7 @@ Backends available are :
 * [mpd][]
 
 Tools used :
-* [id3][https://github.com/squell/id3]
+* [id3][]
 
 ## Installation
 
@@ -155,3 +155,4 @@ Nicolas Lamirault <nicolas.lamirault@gmail.com>
 [vlc]: http://www.videolan.org/vlc/
 [mplayer]: http://www.mplayerhq.hu/design7/news.html
 [mpd]: https://www.musicpd.org/
+[id3]: https://github.com/squell/id3]
