@@ -22,37 +22,33 @@
 ;;; Code:
 
 
+(defun dionysos--process-sentinel (process event hook-fn)
+  (when (memq (process-status process)
+              '(exit signal))
+    (message "[dionysos-process] Process %s event:%s status:%s"
+             (process-name process) event (process-exit-status process))
+    (when (= 0 (process-exit-status process))
+      (message "[dionysos-process] Next: %s" hook-fn)
+      (when hook-fn
+        (funcall hook-fn)))))
+
 (defun dionysos--create-process (process-name command arguments &optional hook)
   "Create a new asynchronous process.
 `PROCESS-NAME' is used to identify this process
 `COMMAND' correspond to the program running
 `ARGUMENTS' are arguments passed to the program.
 `HOOK' is called when process is finished."
-  (message "Create Process : %s %s %s %s"
-           process-name command arguments (process-list))
+  (message "[dionysos-process] Create %s %s %s %s"
+           process-name command arguments hook)
   (let ((status (dionysos--status-process process-name)))
-    (message "Process status : %s" status)
+    (message "[dionysos-process] Status : %s" status)
     (unless (equal 'run status)
-      (let ((process
-             (apply 'start-process
-                    process-name
-                    nil
-                    command
-                    arguments)))
-        ;; (lexical-let
-        ;;     ((after-fn hook))
-        (set-process-sentinel process
-                              (lambda (process event)
-                                (when (memq (process-status process)
-                                            '(exit signal))
-                                  (message "Process End %s %s %s"
-                                           (process-name process)
-                                           event
-                                           (process-exit-status process))
-                                  (when (= 0 (process-exit-status process))
-                                    (when hook
-                                        (funcall hook))))))))))
-
+      (lexical-let ((after-fn hook))
+        (let ((process (apply 'start-process process-name nil command arguments)))
+          (set-process-sentinel
+           process
+           (lambda (process event)
+             (dionysos--process-sentinel process event after-fn))))))))
 
 (defun dionysos--kill-process (process-name)
   "Stop a process identified by `PROCESS-NAME'."
