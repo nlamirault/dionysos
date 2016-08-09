@@ -1,6 +1,13 @@
 Dionysos ChangeLog
 ============================
 
+# Version 0.6.0 (08/09/2016)
+
+- Refactoring *fs-mode* UI
+- Add *pause* command to the VLC backend
+- `FIX` Start process and callback after finish
+- Extract ID3 tags from mp3 file using *id3*
+
 # Version 0.5.0 (08/08/2016)
 
 - Add *fs-mode*
