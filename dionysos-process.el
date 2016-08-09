@@ -65,6 +65,12 @@
       (process-status process))))
 
 
+(defun dionysos--send-process (process-name message)
+  "Send `MESSAGE' to a process identified by `PROCESS-NAME'."
+  (let ((process (get-process process-name)))
+    (when process
+      (process-send-string process-name "pause\n"))))
+
 
 (provide 'dionysos-process)
 ;;; dionysos-process.el ends here
