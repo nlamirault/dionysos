@@ -26,8 +26,10 @@
   (with-test-sandbox
    (with-music-file
     "resources/France.mp3"
-    (dionysos--create-process dionysos--process-name "mpg123" (list file))
-    (dionysos--create-process dionysos--process-name "mpg123" (list file))
+    (dionysos--create-process
+     dionysos--process-name "mpg123" (list file) (lambda () (message "ok")))
+    (dionysos--create-process
+     dionysos--process-name "mpg123" (list file) (lambda () (message "ok")))
     (message "Process multiple : %s" (process-list))
     (should (= 1 (length (process-list))))
     (dionysos--kill-process dionysos--process-name)
@@ -39,7 +41,8 @@
   (with-test-sandbox
    (with-music-file
     "resources/Roulement_tambour-01.mp3"
-    (dionysos--create-process dionysos--process-name "mpg123" (list file))
+    (dionysos--create-process
+     dionysos--process-name "mpg123" (list file) (lambda () (message "ok")))
     (should (equal 'run (dionysos--status-process dionysos--process-name)))
     (dionysos--kill-process dionysos--process-name)
     (should (equal nil (process-list))))))

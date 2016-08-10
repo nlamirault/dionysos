@@ -28,6 +28,21 @@
    (should (string-equal "localhost" dionysos-mpd-host))
    (should (= 6600 dionysos-mpd-port))))
 
+(ert-deftest test-dionysos-backend-mpd-start-process ()
+  :tags '(backend mpd)
+  (with-test-sandbox
+   (should (eql 'dionysos--mpd-start (dionysos--backend-start 'mpd)))))
+
+(ert-deftest test-dionysos-backend-mpd-stop-process ()
+  :tags '(backend mpd)
+  (with-test-sandbox
+   (should (equal 'dionysos--mpd-stop (dionysos--backend-stop 'mpd)))))
+
+(ert-deftest test-dionysos-backend-mpd-pause-process ()
+  :tags '(backend mpd)
+  (with-test-sandbox
+   (should (equal 'dionysos--mpd-pause (dionysos--backend-pause 'mpd)))))
+
 
 (provide 'dionysos-backend-mpd-test)
 ;;; dionysos-backend-mpd-test.el ends here

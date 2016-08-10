@@ -27,7 +27,7 @@
 ;;; Code:
 
 (require 'ansi)
-(require 'cl)
+(require 'cl-lib)
 (require 'ert)
 (require 'f)
 (require 'undercover)

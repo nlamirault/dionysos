@@ -39,6 +39,7 @@
           (intern (format "dionysos-%s" name)))
          (command-name (plist-get options :command))
          (command-start (plist-get options :start))
+         (command-pause (plist-get options :pause))
          (command-stop (plist-get options :stop))
          (command (eval command-name))
          (command-name-variable
@@ -56,6 +57,7 @@
        (add-to-list 'dionysos-backends
                     (cons ',name
                           (list (cons 'start ,command-start)
+                                (cons 'pause ,command-pause)
                                 (cons 'stop ,command-stop)))))))
 
 
@@ -66,20 +68,29 @@
 
 
 (defun dionysos--backend-start (name)
+  "Start playing song using backend identified by `NAME'."
   (let ((backend (dionysos--get-backend name)))
     (when backend
       (cdr (assoc 'start backend)))))
 
 
 (defun dionysos--backend-stop (name)
+  "Stop playing song using backend identified by `NAME'."
   (let ((backend (dionysos--get-backend name)))
     (when backend
       (cdr (assoc 'stop backend)))))
 
+(defun dionysos--backend-pause (name)
+  "Pause playing song using backend identified by `NAME'."
+  (let ((backend (dionysos--get-backend name)))
+    (when backend
+      (cdr (assoc 'pause backend)))))
+
 
 (defmacro dionysos--with-backend (&rest body)
   `(if dionysos-backend
-       ,@body
+       (progn
+         ,@body)
      (message "Dionysos: no backend specify.")))
 
 
