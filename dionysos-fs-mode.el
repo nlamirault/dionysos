@@ -281,7 +281,7 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
   (dionysos--fs-mode-with-widget
    (propertize "Playlist")
    (dionysos--fs-mode-render
-    (dionysos--list-directory directory))))
+    (dionysos--list-directory directory '("ogg" "mp3" "wav" "flac")))))
 
 
 (provide 'dionysos-fs-mode)
