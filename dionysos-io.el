@@ -34,10 +34,11 @@
   (when (not (file-directory-p directory-name))
     (error "Not a directory: %s" directory-name))
   (if (eql 'nil filter)
-      (f-files directory-name)
-    (f-files directory-name (lambda (file)
-                              (member (f-ext file) filter)))))
-
+      (f-files directory-name t)
+    (f-files directory-name
+             (lambda (file)
+               (member (f-ext file) filter))
+             t)))
 
 
 (defun dionysos--id3-tag-info (filename)
