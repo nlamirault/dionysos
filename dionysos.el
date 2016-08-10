@@ -46,8 +46,6 @@
 
 ;; Customization
 
-(require 'cl-lib)
-
 (require 'dionysos-custom)
 (require 'dionysos-version)
 (require 'dionysos-io)

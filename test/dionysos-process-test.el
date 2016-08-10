@@ -37,7 +37,7 @@
 
 
 (ert-deftest test-dionysos-process-can-start-process ()
-  :tags '(process current)
+  :tags '(process)
   (with-test-sandbox
    (with-music-file
     "resources/Roulement_tambour-01.mp3"

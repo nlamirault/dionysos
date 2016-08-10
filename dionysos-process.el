@@ -22,7 +22,7 @@
 ;;; Code:
 
 ;; required for lexical-let
-(require 'cl-lib)
+(require 'cl)
 
 
 (defun dionysos--process-sentinel (process event hook-fn)
