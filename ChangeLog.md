@@ -1,7 +1,7 @@
 Dionysos ChangeLog
 ============================
 
-# Version 0.6.0 (08/09/2016)
+# Version 0.6.0 (08/10/2016)
 
 - Refactoring *fs-mode* UI
 - Add *pause* command to the VLC backend
