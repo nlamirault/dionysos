@@ -34,7 +34,7 @@
   (when (not (file-directory-p directory-name))
     (error "Not a directory: %s" directory-name))
   (if (eql 'nil filter)
-      (f-files directory-name t)
+      (f-files directory-name nil t)
     (f-files directory-name
              (lambda (file)
                (member (f-ext file) filter))
