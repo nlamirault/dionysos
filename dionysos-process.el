@@ -1,4 +1,4 @@
-;;; dionysos-process.el --- some tools
+;;; dionysos-process.el --- some tools -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
@@ -20,6 +20,9 @@
 ;;; Commentary:
 
 ;;; Code:
+
+;; required for lexical-let
+(require 'cl-lib)
 
 
 (defun dionysos--process-sentinel (process event hook-fn)
@@ -43,12 +46,12 @@
   (let ((status (dionysos--status-process process-name)))
     (message "[dionysos-process] Status : %s" status)
     (unless (equal 'run status)
-      (lexical-let ((after-fn hook))
+      (lexical-let ((hook hook))
         (let ((process (apply 'start-process process-name nil command arguments)))
           (set-process-sentinel
            process
            (lambda (process event)
-             (dionysos--process-sentinel process event after-fn))))))))
+             (dionysos--process-sentinel process event hook))))))))
 
 (defun dionysos--kill-process (process-name)
   "Stop a process identified by `PROCESS-NAME'."
