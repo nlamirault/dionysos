@@ -212,8 +212,9 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
      for n from 1 to (length songs)
      do (let ((song (elt songs (- n 1)))
               (start (point)))
-          (dionysos--fs-mode-render-song song)
-          (put-text-property start (point) :dionysos-media song)))
+          (when (stringp song)
+            (dionysos--fs-mode-render-song song)
+            (put-text-property start (point) :dionysos-media song))))
     (widget-insert "\n")))
 
 
@@ -230,6 +231,10 @@ Optional argument `WIDTH-RIGHT' is the width of the right argument."
      (let ((inhibit-read-only t))
        (erase-buffer)
        (remove-overlays)
+       (when (and window-system bongo-logo)
+         (insert "\n  ")
+         (insert-image (dionysos--get-logo) "[Dionysos]")
+         (insert "\n"))
        (widget-insert (format "\n[%s]\n\n" ,title))
        ,@body)
      (use-local-map widget-keymap)

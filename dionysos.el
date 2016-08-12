@@ -49,6 +49,7 @@
 (require 'dionysos-custom)
 (require 'dionysos-version)
 (require 'dionysos-io)
+(require 'dionysos-media)
 (require 'dionysos-notify)
 (require 'dionysos-process)
 (require 'dionysos-ui)
