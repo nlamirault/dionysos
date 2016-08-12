@@ -63,7 +63,11 @@
   "Load current library from FILE."
   (let ((path (s-concat dionysos-source-dir file)))
     (message (ansi-yellow "[dionysos] Load library from %s" path))
-    (undercover "*.el" (:exclude "*-test.el"))
+    (when (require 'undercover nil t)
+      (undercover "*.el"
+                  (:report-file "/tmp/dionysos-report.json")
+                  ;; (:report-type 'text)
+                  (:send-report t)))
     (require 'dionysos path)))
 
 

@@ -34,4 +34,4 @@
  (depends-on "pkg-info" "0.5.0")
  (depends-on "ert")
  (depends-on "ert-runner" "0.6.4")
- (depends-on "undercover" "0.4.0"))
+ (depends-on "undercover" "0.6.0"))
