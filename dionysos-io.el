@@ -33,22 +33,28 @@
                        "Insert directory: " default-directory nil t))))
   (when (not (file-directory-p directory-name))
     (error "Not a directory: %s" directory-name))
-  (if (eql 'nil filter)
-      (f-files directory-name nil t)
-    (f-files directory-name
-             (lambda (file)
-               (member (f-ext file) filter))
-             t)))
+  (unwind-protect
+      (condition-case err
+          (if (eql 'nil filter)
+              (f-files directory-name nil t)
+            (f-files directory-name
+                     (lambda (file)
+                       (member (f-ext file) filter))
+                     t))
+        ('error (message "[dionysos-io] Error: %s" err)))))
+
 
 
 (defun dionysos--id3-tag-info (filename)
   "Extract ID3 tags from MP3 file using `FILENAME' into an hashtable.."
   (let ((tags (make-hash-table   :test 'equal)))
-    (mapc (lambda (kv)
-            (let ((data (split-string kv ":")))
-              (puthash (first data) (s-trim (second data)) tags)))
-          (split-string
-           (shell-command-to-string (s-concat "id3 " filename)) "\n" t))
+    (message "[dionysos-io] ID3 for %s" filename)
+    (when (stringp filename)
+      (mapc (lambda (kv)
+              (let ((data (split-string kv ":")))
+                (puthash (first data) (s-trim (second data)) tags)))
+            (split-string
+             (shell-command-to-string (s-concat "id3 " filename)) "\n" t)))
     tags))
 
 
