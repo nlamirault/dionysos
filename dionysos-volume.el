@@ -47,6 +47,8 @@
 ;; Intern
 ;; ------------------
 
+(defconst dionysos--volume-amixer "amixer"
+  "The amixer volume command.")
 
 (defconst dionysos--volume-process "dionysos-volume"
   "The process name for Dionysos volume management process.")
@@ -58,6 +60,9 @@
 (defconst dionysos--volume-amixer-decrease-args
   (list "-q" "sset" "Master" "5%-")
   "Arguments to decrease volume for amixer.")
+
+(defconst dionysos--volume-pamixer "pamixer"
+  "The pamixer volume command.")
 
 (defconst dionysos--volume-pamixer-increase-args
   (list "-i" "5")
@@ -73,32 +78,59 @@
 ;; ------------------
 
 
+(defun dionysos--volume-mixer ()
+  "Return a mixer."
+  (cond ((eql 'amixer dionysos-volume-cmd)
+         (list dionysos--volume-amixer
+               dionysos--volume-amixer-increase-args
+               dionysos--volume-amixer-decrease-args))
+        ((eq 'pamixer dionysos-volume-cmd)
+         (list dionysos--volume-pamixer
+               dionysos--volume-pamixer-increase-args
+               dionysos--volume-pamixer-decrease-args))
+        (t nil)))
+
+
 (defun dionysos-volume-raise ()
   "Raise volume."
   (interactive)
-  (cond ((eql 'amixer dionysos-volume-cmd)
-         (dionysos--create-process dionysos--volume-process
-                                   "amixer"
-                                   dionysos--volume-amixer-increase-args))
-        ((eql 'pamixer dionysos-volume-cmd)
-         (dionysos--create-process dionysos--volume-process
-                                   "pamixer"
-                                   dionysos--volume-pamixer-increase-args))
-        (t (message "No volume command available."))))
+  (let ((mixer (dionysos--volume-mixer)))
+    (if mixer
+        (dionysos--create-process dionysos--volume-process
+                                  (car mixer)
+                                  (cadr mixer))
+      (message "No volume command available."))))
+
+  ;; (cond ((eql 'amixer dionysos-volume-cmd)
+  ;;        (dionysos--create-process dionysos--volume-process
+  ;;                                  dionysos--volume-amixer
+  ;;                                  dionysos--volume-amixer-increase-args))
+  ;;       ((eql 'pamixer dionysos-volume-cmd)
+  ;;        (dionysos--create-process dionysos--volume-process
+  ;;                                  dionysos--volume-pamixer
+  ;;                                  dionysos--volume-pamixer-increase-args))
+  ;;       (t (message "No volume command available."))))
 
 
 (defun dionysos-volume-decrease ()
   "Decrease volume."
   (interactive)
-  (cond ((eql 'amixer dionysos-volume-cmd)
-         (dionysos--create-process dionysos--volume-process
-                                   "amixer"
-                                   dionysos--volume-amixer-decrease-args))
-        ((eql 'pamixer dionysos-volume-cmd)
-         (dionysos--create-process dionysos--volume-process
-                                   "pamixer"
-                                   dionysos--volume-pamixer-decrease-args))
-        (t (message "No volume command available."))))
+  (let ((mixer (dionysos--volume-mixer)))
+    (if mixer
+        (dionysos--create-process dionysos--volume-process
+                                  (car mixer)
+                                  (caddr mixer))
+      (message "No volume command available."))))
+
+  ;; (cond ((eql 'amixer dionysos-volume-cmd)
+  ;;        (dionysos--create-process dionysos--volume-process
+  ;;                                  dionysos--volume-amixer
+  ;;                                  dionysos--volume-amixer-decrease-args))
+  ;;       ((eql 'pamixer dionysos-volume-cmd)
+  ;;        (dionysos--create-process dionysos--volume-process
+  ;;                                  dionysos--volume-pamixer
+  ;;                                  dionysos--volume-pamixer-decrease-args))
+  ;;       (t (message "No volume command available."))))
 
 
 (provide 'dionysos-volume)
