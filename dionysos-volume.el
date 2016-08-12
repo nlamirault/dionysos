@@ -101,16 +101,6 @@
                                   (cadr mixer))
       (message "No volume command available."))))
 
-  ;; (cond ((eql 'amixer dionysos-volume-cmd)
-  ;;        (dionysos--create-process dionysos--volume-process
-  ;;                                  dionysos--volume-amixer
-  ;;                                  dionysos--volume-amixer-increase-args))
-  ;;       ((eql 'pamixer dionysos-volume-cmd)
-  ;;        (dionysos--create-process dionysos--volume-process
-  ;;                                  dionysos--volume-pamixer
-  ;;                                  dionysos--volume-pamixer-increase-args))
-  ;;       (t (message "No volume command available."))))
-
 
 (defun dionysos-volume-decrease ()
   "Decrease volume."
@@ -121,16 +111,6 @@
                                   (car mixer)
                                   (caddr mixer))
       (message "No volume command available."))))
-
-  ;; (cond ((eql 'amixer dionysos-volume-cmd)
-  ;;        (dionysos--create-process dionysos--volume-process
-  ;;                                  dionysos--volume-amixer
-  ;;                                  dionysos--volume-amixer-decrease-args))
-  ;;       ((eql 'pamixer dionysos-volume-cmd)
-  ;;        (dionysos--create-process dionysos--volume-process
-  ;;                                  dionysos--volume-pamixer
-  ;;                                  dionysos--volume-pamixer-decrease-args))
-  ;;       (t (message "No volume command available."))))
 
 
 (provide 'dionysos-volume)
