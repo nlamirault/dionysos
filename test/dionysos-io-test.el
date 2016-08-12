@@ -28,6 +28,7 @@
                  (f-join dionysos-testsuite-dir "resources"))))
      (should (= 5 (length files))))))
 
+
 (ert-deftest test-dionysos-list-directory-simple-filter ()
   :tags '(io)
   (with-test-sandbox
@@ -35,6 +36,7 @@
                  (f-join dionysos-testsuite-dir "resources")
                  '("mp3"))))
      (should (= 3 (length files))))))
+
 
 (ert-deftest test-dionysos-list-directory-multiple-filters ()
   :tags '(io)
@@ -44,11 +46,26 @@
                  '("mp3" "ogg"))))
      (should (= 4 (length files))))))
 
+
 (ert-deftest test-dionysos-list-directory-with-file ()
   :tags '(io)
   (with-test-sandbox
    (should-error (dionysos--list-directory
                   (f-join dionysos-testsuite-dir "dionysos-io-test.el")))))
+
+
+(ert-deftest test-dionysos-extract-id3-tags ()
+  :tags '(io current)
+  (with-test-sandbox
+   (with-music-file
+    "resources/France.mp3"
+    (let ((tags (dionysos--id3-tag-info file)))
+      (should (string-equal "ID3v2.3" (gethash "Metadata" tags)))
+      (should (string-equal "hymne france - france anthem" (gethash "Title" tags)))
+      (should (string-equal "http" (gethash "Artist" tags)))
+      (should (string-equal "2008" (gethash "Year" tags)))
+      (should (string-equal "Other" (gethash "Genre" tags)))))))
+
 
 
 (provide 'dionysos-io-test)
