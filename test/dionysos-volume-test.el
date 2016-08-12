@@ -41,13 +41,16 @@
 
 (ert-deftest test-dionysos-volume-raise ()
   :tags '(volume)
-  (when (executable-find "pamixer")
+  (cond ((executable-find "pamixer")
+         (setq dionysos-volume-cmd 'pamixer))
+        ((executable-find "pamixer")
+         (setq dionysos-volume-cmd 't)))
+  (when dionysos-volume-cmd
     (with-test-sandbox
      (with-music-file
       "resources/France.mp3"
-      (let ((dionysos-volume-cmd 'pamixer))
-        (dionysos-volume-raise)
-        (dionysos--check-volume-process))))))
+      (dionysos-volume-raise)
+      (dionysos--check-volume-process)))))
 
 
 (ert-deftest test-dionysos-volume-pamixer-command ()
@@ -62,13 +65,16 @@
 
 (ert-deftest test-dionysos-volume-decrease ()
   :tags '(volume current)
-  (when (executable-find "pamixer")
+  (cond ((executable-find "pamixer")
+         (setq dionysos-volume-cmd 'pamixer))
+        ((executable-find "pamixer")
+         (setq dionysos-volume-cmd 't)))
+  (when dionysos-volume-cmd
     (with-test-sandbox
      (with-music-file
       "resources/France.mp3"
-      (let ((dionysos-volume-cmd 'pamixer))
-        (dionysos-volume-decrease)
-        (dionysos--check-volume-process))))))
+      (dionysos-volume-decrease)
+      (dionysos--check-volume-process)))))
 
 
 
