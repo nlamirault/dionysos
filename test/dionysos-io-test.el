@@ -44,6 +44,12 @@
                  '("mp3" "ogg"))))
      (should (= 4 (length files))))))
 
+(ert-deftest test-dionysos-list-directory-with-file ()
+  :tags '(io)
+  (with-test-sandbox
+   (should-error (dionysos--list-directory
+                  (f-join dionysos-testsuite-dir "dionysos-io-test.el")))))
+
 
 (provide 'dionysos-io-test)
 ;;; dionysos-io-test.el ends here
