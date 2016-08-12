@@ -32,6 +32,24 @@
      (should (eq dionysos--volume-amixer-decrease-args (caddr mixer))))))
 
 
+(defun dionysos--check-volume-process ()
+  (message "Process multiple : %s" (process-list))
+  (should (= 1 (length (process-list))))
+  (dionysos--kill-process dionysos--volume-process)
+  (should (equal nil (process-list))))
+
+
+(ert-deftest test-dionysos-volume-raise ()
+  :tags '(volume)
+  (when (executable-find "pamixer")
+    (with-test-sandbox
+     (with-music-file
+      "resources/France.mp3"
+      (let ((dionysos-volume-cmd 'pamixer))
+        (dionysos-volume-raise)
+        (dionysos--check-volume-process))))))
+
+
 (ert-deftest test-dionysos-volume-pamixer-command ()
   :tags '(volume)
   (with-test-sandbox
@@ -40,6 +58,19 @@
      (should (string-equal dionysos--volume-pamixer (car mixer)))
      (should (eq dionysos--volume-pamixer-increase-args (cadr mixer)))
      (should (eq dionysos--volume-pamixer-decrease-args (caddr mixer))))))
+
+
+(ert-deftest test-dionysos-volume-decrease ()
+  :tags '(volume current)
+  (when (executable-find "pamixer")
+    (with-test-sandbox
+     (with-music-file
+      "resources/France.mp3"
+      (let ((dionysos-volume-cmd 'pamixer))
+        (dionysos-volume-decrease)
+        (dionysos--check-volume-process))))))
+
+
 
 (provide 'dionysos-volume-test)
 ;;; dionysos-volume-test.el ends here
