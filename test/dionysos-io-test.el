@@ -55,17 +55,16 @@
 
 
 (ert-deftest test-dionysos-extract-id3-tags ()
-  :tags '(io current)
+  :tags '(io)
   (with-test-sandbox
-   (with-music-file
-    "resources/France.mp3"
+   (with-music-file-2
+    file "resources/France.mp3"
     (let ((tags (dionysos--id3-tag-info file)))
       (should (string-equal "ID3v2.3" (gethash "Metadata" tags)))
       (should (string-equal "hymne france - france anthem" (gethash "Title" tags)))
       (should (string-equal "http" (gethash "Artist" tags)))
       (should (string-equal "2008" (gethash "Year" tags)))
       (should (string-equal "Other" (gethash "Genre" tags)))))))
-
 
 
 (provide 'dionysos-io-test)
