@@ -1,6 +1,12 @@
 Dionysos ChangeLog
 ============================
 
+# Version 0.7.0 (08/12/2016)
+
+- Handle errors on listing music files
+- Update *undercover*
+- Add media utilities and display logo
+
 # Version 0.6.0 (08/10/2016)
 
 - Refactoring *fs-mode* UI

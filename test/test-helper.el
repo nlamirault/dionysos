@@ -1,6 +1,6 @@
 ;; test-helper.el --- Test helpers for dionysos.el
 
-;; Copyright (C) 2015-2016 Nicolas Lamirault <nicolas.lamirault@gmail.com>
+;; Copyright (C) 2015-2017 Nicolas Lamirault <nicolas.lamirault@gmail.com>
 
 ;; Author: Nicolas Lamirault <nicolas.lamirault@gmail.com>
 ;; Homepage: https://github.com/nlamirault/dionysos
@@ -65,9 +65,9 @@
     (message (ansi-yellow "[dionysos] Load library from %s" path))
     (when (require 'undercover nil t)
       (undercover "*.el"
-                  (:report-file "/tmp/dionysos-report.json")
-                  ;; (:report-type 'text)
-                  (:send-report t)))
+                  ;;(:report-file "/tmp/dionysos-report.json")
+                  ;;(:send-report )))
+                  (:report-type 'text)))
     (require 'dionysos path)))
 
 
